@@ -17,8 +17,9 @@
  * limitations under the License.
  * ‍
  */
-
-import Hbar from "../Hbar.js";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as HashgraphProto from "@u2u/proto";
+import U2U from "../U2U.js";
 import AccountId from "./AccountId.js";
 import Transaction, {
     DEFAULT_AUTO_RENEW_PERIOD,
@@ -29,8 +30,6 @@ import Duration from "../Duration.js";
 import Long from "long";
 import Key from "../Key.js";
 import EvmAddress from "../EvmAddress.js";
-import * as HashgraphProto from "@hashgraph/proto";
-import PublicKey from "../PublicKey.js";
 
 /**
  * @typedef {import("bignumber.js").default} BigNumber
@@ -47,7 +46,7 @@ export default class AccountCreateTransaction extends Transaction {
     /**
      * @param {object} [props]
      * @param {Key} [props.key]
-     * @param {number | string | Long | BigNumber | Hbar} [props.initialBalance]
+     * @param {number | string | Long | BigNumber | U2U} [props.initialBalance]
      * @param {boolean} [props.receiverSignatureRequired]
      * @param {AccountId} [props.proxyAccountId]
      * @param {Duration | Long | number} [props.autoRenewPeriod]
@@ -56,8 +55,7 @@ export default class AccountCreateTransaction extends Transaction {
      * @param {AccountId | string} [props.stakedAccountId]
      * @param {Long | number} [props.stakedNodeId]
      * @param {boolean} [props.declineStakingReward]
-     * @param {PublicKey} [props.aliasKey]
-     * @param {EvmAddress} [props.aliasEvmAddress]
+     * @param {EvmAddress} [props.alias]
      */
     constructor(props = {}) {
         super();
@@ -70,19 +68,19 @@ export default class AccountCreateTransaction extends Transaction {
 
         /**
          * @private
-         * @type {?Hbar}
+         * @type {?U2U}
          */
         this._initialBalance = null;
 
         /**
          * @private
-         * @type {Hbar}
+         * @type {U2U}
          */
         this._sendRecordThreshold = DEFAULT_RECORD_THRESHOLD;
 
         /**
          * @private
-         * @type {Hbar}
+         * @type {U2U}
          */
         this._receiveRecordThreshold = DEFAULT_RECORD_THRESHOLD;
 
@@ -136,15 +134,9 @@ export default class AccountCreateTransaction extends Transaction {
 
         /**
          * @private
-         * @type {?PublicKey}
-         */
-        this._aliasKey = null;
-
-        /**
-         * @private
          * @type {?EvmAddress}
          */
-        this._aliasEvmAddress = null;
+        this._alias = null;
 
         if (props.key != null) {
             this.setKey(props.key);
@@ -189,12 +181,8 @@ export default class AccountCreateTransaction extends Transaction {
             this.setDeclineStakingReward(props.declineStakingReward);
         }
 
-        if (props.aliasKey != null) {
-            this.setAliasKey(props.aliasKey);
-        }
-
-        if (props.aliasEvmAddress != null) {
-            this.setAliasEvmAddress(props.aliasEvmAddress);
+        if (props.alias != null) {
+            this.setAlias(props.alias);
         }
     }
 
@@ -220,20 +208,11 @@ export default class AccountCreateTransaction extends Transaction {
                 body.cryptoCreateAccount
             );
 
-        let aliasKey = undefined;
-        let aliasEvmAddress = undefined;
+        let alias = undefined;
         if (create.alias != null && create.alias.length > 0) {
             if (create.alias.length === 20) {
-                aliasEvmAddress = EvmAddress.fromBytes(create.alias);
-            } else {
-                aliasKey = Key._fromProtobufKey(
-                    HashgraphProto.proto.Key.decode(create.alias)
-                );
+                alias = EvmAddress.fromBytes(create.alias);
             }
-        }
-
-        if (!(aliasKey instanceof PublicKey)) {
-            aliasKey = undefined;
         }
 
         return Transaction._fromProtobufTransactions(
@@ -278,8 +257,7 @@ export default class AccountCreateTransaction extends Transaction {
                         ? create.stakedNodeId
                         : undefined,
                 declineStakingReward: create.declineReward == true,
-                aliasKey,
-                aliasEvmAddress,
+                alias,
             }),
             transactions,
             signedTransactions,
@@ -315,7 +293,7 @@ export default class AccountCreateTransaction extends Transaction {
     }
 
     /**
-     * @returns {?Hbar}
+     * @returns {?U2U}
      */
     get initialBalance() {
         return this._initialBalance;
@@ -324,15 +302,15 @@ export default class AccountCreateTransaction extends Transaction {
     /**
      * Set the initial amount to transfer into this account.
      *
-     * @param {number | string | Long | BigNumber | Hbar} initialBalance
+     * @param {number | string | Long | BigNumber | U2U} initialBalance
      * @returns {this}
      */
     setInitialBalance(initialBalance) {
         this._requireNotFrozen();
         this._initialBalance =
-            initialBalance instanceof Hbar
+            initialBalance instanceof U2U
                 ? initialBalance
-                : new Hbar(initialBalance);
+                : new U2U(initialBalance);
 
         return this;
     }
@@ -500,43 +478,50 @@ export default class AccountCreateTransaction extends Transaction {
     }
 
     /**
-     * @beta - Please note this is a beta feature and it's implementation is subject to change
-     * @returns {?PublicKey}
-     */
-    get aliasKey() {
-        return this._aliasKey;
-    }
-
-    /**
-     * @beta - Please note this is a beta feature and it's implementation is subject to change
-     * @param {PublicKey} aliasKey
-     * @returns {this}
-     */
-    setAliasKey(aliasKey) {
-        this._aliasKey = aliasKey;
-        return this;
-    }
-
-    /**
-     * @beta - Please note this is a beta feature and it's implementation is subject to change
+     * The bytes to be used as the account's alias.
+     *
+     * The bytes must be formatted as the calcluated last 20 bytes of the
+     * keccak-256 of the ECDSA primitive key.
+     *
+     * All other types of keys, including but not limited to ED25519, ThresholdKey, KeyList, ContractID, and
+     * delegatable_contract_id, are not supported.
+     *
+     * At most only one account can ever have a given alias on the network.
+     *
      * @returns {?EvmAddress}
      */
-    get aliasEvmAddress() {
-        return this._aliasEvmAddress;
+    get alias() {
+        return this._alias;
     }
 
     /**
-     * @beta - Please note this is a beta feature and it's implementation is subject to change
-     * @param {Uint8Array | string | EvmAddress} aliasEvmAddress
+     * The bytes to be used as the account's alias.
+     *
+     * The bytes must be formatted as the calcluated last 20 bytes of the
+     * keccak-256 of the ECDSA primitive key.
+     *
+     * All other types of keys, including but not limited to ED25519, ThresholdKey, KeyList, ContractID, and
+     * delegatable_contract_id, are not supported.
+     *
+     * At most only one account can ever have a given alias on the network.
+     *
+     * @param {string | EvmAddress} alias
      * @returns {this}
      */
-    setAliasEvmAddress(aliasEvmAddress) {
-        if (typeof aliasEvmAddress === "string") {
-            this._aliasEvmAddress = EvmAddress.fromString(aliasEvmAddress);
-        } else if (aliasEvmAddress instanceof Uint8Array) {
-            this._aliasEvmAddress = EvmAddress.fromBytes(aliasEvmAddress);
+    setAlias(alias) {
+        if (typeof alias === "string") {
+            if (
+                (alias.startsWith("0x") && alias.length == 42) ||
+                alias.length == 40
+            ) {
+                this._alias = EvmAddress.fromString(alias);
+            } else {
+                throw new Error(
+                    'evmAddress must be a valid EVM address with or without "0x" prefix'
+                );
+            }
         } else {
-            this._aliasEvmAddress = aliasEvmAddress;
+            this._alias = alias;
         }
 
         return this;
@@ -578,12 +563,8 @@ export default class AccountCreateTransaction extends Transaction {
      */
     _makeTransactionData() {
         let alias = null;
-        if (this._aliasKey != null) {
-            alias = HashgraphProto.proto.Key.encode(
-                this._aliasKey._toProtobufKey()
-            ).finish();
-        } else if (this._aliasEvmAddress != null) {
-            alias = this._aliasEvmAddress.toBytes();
+        if (this._alias != null) {
+            alias = this._alias.toBytes();
         }
 
         return {

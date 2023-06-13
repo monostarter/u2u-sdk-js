@@ -7,7 +7,7 @@ import {
     AccountInfo,
     AccountInfoQuery,
     AccountRecordsQuery,
-    Hbar,
+    U2U,
     LedgerId,
     PublicKey,
     Transaction,
@@ -414,8 +414,8 @@ async function main() {
 
     // Transaction
     const transaction = await new TransferTransaction()
-        .addHbarTransfer("0.0.3", Hbar.fromTinybars(1))
-        .addHbarTransfer(signer.accountId, Hbar.fromTinybars(1).negated())
+        .addHbarTransfer("0.0.3", U2U.fromTinyU2U(1))
+        .addHbarTransfer(signer.accountId, U2U.fromTinyU2U(1).negated())
         .freezeWithSigner(signer);
     const response = await transaction.executeWithSigner(signer);
     const hash = Buffer.from(response.transactionHash).toString("hex");

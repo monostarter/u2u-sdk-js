@@ -6,7 +6,7 @@ import {
     FileCreateTransaction,
     ContractFunctionParameters,
     ContractCallQuery,
-    Hbar,
+    U2U,
 } from "@hashgraph/sdk";
 
 import dotenv from "dotenv";
@@ -93,7 +93,7 @@ async function main() {
         .setContractId(contractId)
         // Set the function to call on the contract
         .setFunction("get_message")
-        .setQueryPayment(new Hbar(1))
+        .setQueryPayment(new U2U(1))
         .executeWithSigner(wallet);
 
     // Check if an error was returned
@@ -156,7 +156,7 @@ async function main() {
         // Set the function to call on the contract
         .setFunction("get_message")
         // Set query payment explicitly
-        .setQueryPayment(new Hbar(3))
+        .setQueryPayment(new U2U(3))
         .executeWithSigner(wallet);
 
     // Check if there were any errors

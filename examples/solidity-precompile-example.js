@@ -23,7 +23,7 @@ async function main() {
 
     let transaction = await new hashgraph.AccountCreateTransaction()
         .setKey(alicePublicKey)
-        .setInitialBalance(hashgraph.Hbar.fromTinybars(1000))
+        .setInitialBalance(hashgraph.U2U.fromTinyU2U(1000))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
 
@@ -54,7 +54,7 @@ async function main() {
             );
             return true;
         })
-        .setPayableAmountForStep(1, new hashgraph.Hbar(20))
+        .setPayableAmountForStep(1, new hashgraph.U2U(20))
         // step 3 associates Alice with the token, which requires Alice's signature
         .addSignerForStep(3, alicePrivateKey)
         .addSignerForStep(5, alicePrivateKey)
@@ -65,7 +65,7 @@ async function main() {
                     .addBytes(alicePublicKey.toBytesRaw())
             );
         })
-        .setPayableAmountForStep(11, new hashgraph.Hbar(40))
+        .setPayableAmountForStep(11, new hashgraph.U2U(40))
         // Because we're setting the adminKey for the created NFT token to Alice's key,
         // Alice must sign the ContractExecuteTransaction.
         .addSignerForStep(11, alicePrivateKey)

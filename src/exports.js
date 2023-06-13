@@ -73,6 +73,7 @@ export { default as EthereumTransactionDataLegacy } from "./EthereumTransactionD
 export { default as EthereumTransactionDataEip1559 } from "./EthereumTransactionDataEip1559.js";
 export { default as EthereumTransactionData } from "./EthereumTransactionData.js";
 export { default as EthereumFlow } from "./EthereumFlow.js";
+export { default as EvmAddress } from "./EvmAddress.js";
 export { default as ExchangeRate } from "./ExchangeRate.js";
 export { default as ExchangeRates } from "./ExchangeRates.js";
 export { default as Executable } from "./Executable.js";
@@ -91,9 +92,9 @@ export { default as FileInfo } from "./file/FileInfo.js";
 export { default as FileInfoQuery } from "./file/FileInfoQuery.js";
 export { default as FileUpdateTransaction } from "./file/FileUpdateTransaction.js";
 export { default as FreezeTransaction } from "./system/FreezeTransaction.js";
-export { default as Hbar } from "./Hbar.js";
-export { default as HbarAllowance } from "./account/HbarAllowance.js";
-export { default as HbarUnit } from "./HbarUnit.js";
+export { default as U2U } from "./U2U.js";
+export { default as U2UAllowance } from "./account/U2UAllowance.js";
+export { default as U2UUnit } from "./U2UUnit.js";
 export { default as LiveHash } from "./account/LiveHash.js";
 export { default as LiveHashAddTransaction } from "./account/LiveHashAddTransaction.js";
 export { default as LiveHashDeleteTransaction } from "./account/LiveHashDeleteTransaction.js";
@@ -166,13 +167,14 @@ export { default as TransactionResponse } from "./transaction/TransactionRespons
 export { default as Transfer } from "./Transfer.js";
 export { default as TransferTransaction } from "./account/TransferTransaction.js";
 export { default as Wallet } from "./Wallet.js";
+export { default as Logger } from "./logger/Logger.js";
+export { default as LogLevel } from "./logger/LogLevel.js";
+export * as EntityIdHelper from "./EntityIdHelper.js";
 
 export { default as StatusError } from "./StatusError.js";
 export { default as PrecheckStatusError } from "./PrecheckStatusError.js";
 export { default as ReceiptStatusError } from "./ReceiptStatusError.js";
 export { default as LedgerId } from "./LedgerId.js";
-
-export { default as Logger } from "js-logger";
 
 /**
  * @typedef {import("./client/Client.js").NetworkName} ClientNetworkName

@@ -22,23 +22,25 @@ import Transaction, {
     TRANSACTION_REGISTRY,
 } from "../transaction/Transaction.js";
 import AccountId from "./AccountId.js";
+import ContractId from "../contract/ContractId.js";
 import TokenId from "../token/TokenId.js";
 import NftId from "../token/NftId.js";
 import Long from "long";
-import Hbar from "../Hbar.js";
-import HbarAllowance from "./HbarAllowance.js";
+import U2U from "../U2U.js";
+import U2UAllowance from "./U2UAllowance.js";
 import TokenAllowance from "./TokenAllowance.js";
 import TokenNftAllowance from "./TokenNftAllowance.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.ICryptoApproveAllowanceTransactionBody} HashgraphProto.proto.ICryptoApproveAllowanceTransactionBody
- * @typedef {import("@hashgraph/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.ICryptoApproveAllowanceTransactionBody} HashgraphProto.proto.ICryptoApproveAllowanceTransactionBody
+ * @typedef {import("@u2u/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
+ * @typedef {import("@u2u/proto").proto.IContractID} HashgraphProto.proto.IContractID
  */
 
 /**
@@ -55,7 +57,7 @@ import TokenNftAllowance from "./TokenNftAllowance.js";
 export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {object} [props]
-     * @param {HbarAllowance[]} [props.hbarApprovals]
+     * @param {U2UAllowance[]} [props.hbarApprovals]
      * @param {TokenAllowance[]} [props.tokenApprovals]
      * @param {TokenNftAllowance[]} [props.nftApprovals]
      */
@@ -64,7 +66,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
 
         /**
          * @private
-         * @type {HbarAllowance[]}
+         * @type {U2UAllowance[]}
          */
         this._hbarApprovals =
             props.hbarApprovals != null ? props.hbarApprovals : [];
@@ -111,7 +113,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
                 hbarApprovals: (allowanceApproval.cryptoAllowances != null
                     ? allowanceApproval.cryptoAllowances
                     : []
-                ).map((approval) => HbarAllowance._fromProtobuf(approval)),
+                ).map((approval) => U2UAllowance._fromProtobuf(approval)),
                 tokenApprovals: (allowanceApproval.tokenAllowances != null
                     ? allowanceApproval.tokenAllowances
                     : []
@@ -130,7 +132,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     }
 
     /**
-     * @returns {HbarAllowance[]}
+     * @returns {U2UAllowance[]}
      */
     get hbarApprovals() {
         return this._hbarApprovals;
@@ -138,24 +140,32 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
 
     /**
      * @param {AccountId | string} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {AccountId | ContractId | string} spenderAccountId
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @returns {AccountAllowanceApproveTransaction}
      */
     approveHbarAllowance(ownerAccountId, spenderAccountId, amount) {
         this._requireNotFrozen();
 
         this._hbarApprovals.push(
-            new HbarAllowance({
+            new U2UAllowance({
                 spenderAccountId:
                     typeof spenderAccountId === "string"
                         ? AccountId.fromString(spenderAccountId)
+                        : spenderAccountId instanceof ContractId
+                        ? AccountId.fromSolidityAddress(
+                              spenderAccountId.toSolidityAddress()
+                          )
                         : spenderAccountId,
                 ownerAccountId:
                     typeof ownerAccountId === "string"
                         ? AccountId.fromString(ownerAccountId)
+                        : ownerAccountId instanceof ContractId
+                        ? AccountId.fromSolidityAddress(
+                              ownerAccountId.toSolidityAddress()
+                          )
                         : ownerAccountId,
-                amount: amount instanceof Hbar ? amount : new Hbar(amount),
+                amount: amount instanceof U2U ? amount : new U2U(amount),
             })
         );
 
@@ -165,19 +175,19 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @deprecated - Use `approveHbarAllowance()` instead
      * @param {AccountId | string} spenderAccountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @returns {AccountAllowanceApproveTransaction}
      */
     addHbarAllowance(spenderAccountId, amount) {
         this._requireNotFrozen();
 
         this._hbarApprovals.push(
-            new HbarAllowance({
+            new U2UAllowance({
                 spenderAccountId:
                     typeof spenderAccountId === "string"
                         ? AccountId.fromString(spenderAccountId)
                         : spenderAccountId,
-                amount: amount instanceof Hbar ? amount : new Hbar(amount),
+                amount: amount instanceof U2U ? amount : new U2U(amount),
                 ownerAccountId: null,
             })
         );
@@ -195,7 +205,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {TokenId | string} tokenId
      * @param {AccountId | string} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @param {Long | number} amount
      * @returns {AccountAllowanceApproveTransaction}
      */
@@ -211,10 +221,18 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
                 spenderAccountId:
                     typeof spenderAccountId === "string"
                         ? AccountId.fromString(spenderAccountId)
+                        : spenderAccountId instanceof ContractId
+                        ? AccountId.fromSolidityAddress(
+                              spenderAccountId.toSolidityAddress()
+                          )
                         : spenderAccountId,
                 ownerAccountId:
                     typeof ownerAccountId === "string"
                         ? AccountId.fromString(ownerAccountId)
+                        : ownerAccountId instanceof ContractId
+                        ? AccountId.fromSolidityAddress(
+                              ownerAccountId.toSolidityAddress()
+                          )
                         : ownerAccountId,
                 amount:
                     typeof amount === "number"
@@ -260,7 +278,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @deprecated - Use `approveTokenNftAllowance()` instead
      * @param {NftId | string} nftId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @returns {AccountAllowanceApproveTransaction}
      */
     addTokenNftAllowance(nftId, spenderAccountId) {
@@ -282,7 +300,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {NftId | string} nftId
      * @param {AccountId | string | null} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @param {AccountId | string | null} delegatingSpender
      * @returns {AccountAllowanceApproveTransaction}
      */
@@ -298,6 +316,10 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
         const spender =
             typeof spenderAccountId === "string"
                 ? AccountId.fromString(spenderAccountId)
+                : spenderAccountId instanceof ContractId
+                ? AccountId.fromSolidityAddress(
+                      spenderAccountId.toSolidityAddress()
+                  )
                 : spenderAccountId;
         let found = false;
 
@@ -323,6 +345,10 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
                     ownerAccountId:
                         typeof ownerAccountId === "string"
                             ? AccountId.fromString(ownerAccountId)
+                            : ownerAccountId instanceof ContractId
+                            ? AccountId.fromSolidityAddress(
+                                  ownerAccountId.toSolidityAddress()
+                              )
                             : ownerAccountId,
                     serialNumbers: [id.serial],
                     allSerials: false,
@@ -340,7 +366,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {NftId | string} nftId
      * @param {AccountId | string} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @returns {AccountAllowanceApproveTransaction}
      */
     approveTokenNftAllowance(nftId, ownerAccountId, spenderAccountId) {
@@ -355,7 +381,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {NftId | string} nftId
      * @param {AccountId | string} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @param {AccountId | string} delegatingSpender
      * @returns {AccountAllowanceApproveTransaction}
      */
@@ -376,7 +402,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {TokenId | string} tokenId
      * @param {AccountId | string | null} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @param {boolean} allSerials
      * @returns {AccountAllowanceApproveTransaction}
      */
@@ -397,10 +423,18 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
                 spenderAccountId:
                     typeof spenderAccountId === "string"
                         ? AccountId.fromString(spenderAccountId)
+                        : spenderAccountId instanceof ContractId
+                        ? AccountId.fromSolidityAddress(
+                              spenderAccountId.toSolidityAddress()
+                          )
                         : spenderAccountId,
                 ownerAccountId:
                     typeof ownerAccountId === "string"
                         ? AccountId.fromString(ownerAccountId)
+                        : ownerAccountId instanceof ContractId
+                        ? AccountId.fromSolidityAddress(
+                              ownerAccountId.toSolidityAddress()
+                          )
                         : ownerAccountId,
                 serialNumbers: null,
                 allSerials,
@@ -430,7 +464,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {TokenId | string} tokenId
      * @param {AccountId | string} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @returns {AccountAllowanceApproveTransaction}
      */
     approveTokenNftAllowanceAllSerials(
@@ -449,7 +483,7 @@ export default class AccountAllowanceApproveTransaction extends Transaction {
     /**
      * @param {TokenId | string} tokenId
      * @param {AccountId | string} ownerAccountId
-     * @param {AccountId | string} spenderAccountId
+     * @param {AccountId | ContractId | string} spenderAccountId
      * @returns {AccountAllowanceApproveTransaction}
      */
     deleteTokenNftAllowanceAllSerials(

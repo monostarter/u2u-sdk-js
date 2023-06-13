@@ -27,17 +27,17 @@ import TokenNftAllowance from "./TokenNftAllowance.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.ICryptoDeleteAllowanceTransactionBody} HashgraphProto.proto.ICryptoDeleteAllowanceTransactionBody
- * @typedef {import("@hashgraph/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.ICryptoDeleteAllowanceTransactionBody} HashgraphProto.proto.ICryptoDeleteAllowanceTransactionBody
+ * @typedef {import("@u2u/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
  */
 
 /**
- * @typedef {import("./HbarAllowance.js").default} HbarAllowance
+ * @typedef {import("./U2UAllowance.js").default} U2UAllowance
  * @typedef {import("./TokenAllowance.js").default} TokenAllowance
  * @typedef {import("../channel/Channel.js").default} Channel
  * @typedef {import("../client/Client.js").default<*, *>} Client
@@ -52,7 +52,7 @@ import TokenNftAllowance from "./TokenNftAllowance.js";
 export default class AccountAllowanceDeleteTransaction extends Transaction {
     /**
      * @param {object} [props]
-     * @param {HbarAllowance[]} [props.hbarAllowances]
+     * @param {U2UAllowance[]} [props.hbarAllowances]
      * @param {TokenAllowance[]} [props.tokenAllowances]
      * @param {TokenNftAllowance[]} [props.nftAllowances]
      */

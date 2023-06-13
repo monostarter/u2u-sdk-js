@@ -3,7 +3,7 @@ import { expect } from "chai";
 import {
     TransferTransaction,
     HbarUnit,
-    Hbar,
+    U2U,
     TokenId,
     AccountId,
     Transaction,
@@ -36,8 +36,8 @@ describe("TransferTransaction", function () {
         transfer.addHbarTransfer("0.0.1", 1);
 
         expect(
-            transfer.hbarTransfers.get(accountId).to(HbarUnit.Hbar).toNumber()
-        ).to.be.equal(new Hbar(expectedHbar).to(HbarUnit.Hbar).toNumber());
+            transfer.hbarTransfers.get(accountId).to(HbarUnit.U2U).toNumber()
+        ).to.be.equal(new U2U(expectedHbar).to(HbarUnit.U2U).toNumber());
     });
 
     it("should use nftid case for addNftTransfer", function () {

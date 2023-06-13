@@ -3,7 +3,7 @@ import {
     LocalProvider,
     PrivateKey,
     AccountCreateTransaction,
-    Hbar,
+    U2U,
 } from "@hashgraph/sdk";
 
 import dotenv from "dotenv";
@@ -29,7 +29,7 @@ async function main() {
     console.log(`public key = ${newKey.publicKey.toString()}`);
 
     let transaction = await new AccountCreateTransaction()
-        .setInitialBalance(new Hbar(10)) // 10 h
+        .setInitialBalance(new U2U(10)) // 10 h
         .setKey(newKey.publicKey)
         .freezeWithSigner(wallet);
 

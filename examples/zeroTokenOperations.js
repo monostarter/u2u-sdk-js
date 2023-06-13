@@ -31,7 +31,7 @@ async function main() {
 
     let transaction = await new hashgraph.AccountCreateTransaction()
         .setKey(alicePublicKey)
-        .setInitialBalance(hashgraph.Hbar.fromString("10"))
+        .setInitialBalance(hashgraph.U2U.fromString("10"))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
 
@@ -60,7 +60,7 @@ async function main() {
 
     // Configure steps in ContracHelper
     contractHelper
-        .setPayableAmountForStep(0, new hashgraph.Hbar(20))
+        .setPayableAmountForStep(0, new hashgraph.U2U(20))
         .addSignerForStep(1, alicePrivateKey);
     // step 0 creates a fungible token
     // step 1 Associate with account

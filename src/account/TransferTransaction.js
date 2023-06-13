@@ -18,7 +18,7 @@
  * ‍
  */
 
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import TokenId from "../token/TokenId.js";
 import AccountId from "./AccountId.js";
 import Transaction, {
@@ -29,7 +29,7 @@ import NullableTokenDecimalMap from "./NullableTokenDecimalMap.js";
 import Transfer from "../Transfer.js";
 import TokenTransfer from "../token/TokenTransfer.js";
 import TokenTransferMap from "./TokenTransferMap.js";
-import HbarTransferMap from "./HbarTransferMap.js";
+import U2UTransferMap from "./U2UTransferMap.js";
 import TokenNftTransferMap from "./TokenNftTransferMap.js";
 import TokenTransferAccountMap from "./TokenTransferAccountMap.js";
 import TokenNftTransfer from "../token/TokenNftTransfer.js";
@@ -42,16 +42,16 @@ import NftId from "../token/NftId.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.ICryptoTransferTransactionBody} HashgraphProto.proto.ICryptoTransferTransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITokenID} HashgraphProto.proto.ITokenID
- * @typedef {import("@hashgraph/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
- * @typedef {import("@hashgraph/proto").proto.IAccountAmount} HashgraphProto.proto.IAccountAmount
- * @typedef {import("@hashgraph/proto").proto.ITokenTransferList} HashgraphProto.proto.ITokenTransferList
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.ICryptoTransferTransactionBody} HashgraphProto.proto.ICryptoTransferTransactionBody
+ * @typedef {import("@u2u/proto").proto.ITokenID} HashgraphProto.proto.ITokenID
+ * @typedef {import("@u2u/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
+ * @typedef {import("@u2u/proto").proto.IAccountAmount} HashgraphProto.proto.IAccountAmount
+ * @typedef {import("@u2u/proto").proto.ITokenTransferList} HashgraphProto.proto.ITokenTransferList
  */
 
 /**
@@ -77,7 +77,7 @@ import NftId from "../token/NftId.js";
 /**
  * @typedef {object} TransferHbarInput
  * @property {AccountId | string} accountId
- * @property {number | string | Long | BigNumber | Hbar} amount
+ * @property {number | string | Long | BigNumber | U2U} amount
  */
 
 /**
@@ -119,7 +119,7 @@ export default class TransferTransaction extends Transaction {
          */
         this._nftTransfers = [];
 
-        this._defaultMaxTransactionFee = new Hbar(1);
+        this._defaultMaxTransactionFee = new U2U(1);
 
         for (const transfer of props.tokenTransfers != null
             ? props.tokenTransfers
@@ -356,10 +356,10 @@ export default class TransferTransaction extends Transaction {
     }
 
     /**
-     * @returns {HbarTransferMap}
+     * @returns {U2UTransferMap}
      */
     get hbarTransfers() {
-        const map = new HbarTransferMap();
+        const map = new U2UTransferMap();
 
         for (const transfer of this._hbarTransfers) {
             map._set(transfer.accountId, transfer.amount);
@@ -371,7 +371,7 @@ export default class TransferTransaction extends Transaction {
     /**
      * @internal
      * @param {AccountId | string} accountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @param {boolean} isApproved
      * @returns {TransferTransaction}
      */
@@ -382,11 +382,11 @@ export default class TransferTransaction extends Transaction {
             accountId instanceof AccountId
                 ? accountId.clone()
                 : AccountId.fromString(accountId);
-        const hbars = amount instanceof Hbar ? amount : new Hbar(amount);
+        const hbars = amount instanceof U2U ? amount : new U2U(amount);
 
         for (const transfer of this._hbarTransfers) {
             if (transfer.accountId.compare(account) === 0) {
-                transfer.amount = Hbar.fromTinybars(
+                transfer.amount = U2U.fromTinyU2U(
                     transfer.amount.toTinybars().add(hbars.toTinybars())
                 );
                 return this;
@@ -407,7 +407,7 @@ export default class TransferTransaction extends Transaction {
     /**
      * @internal
      * @param {AccountId | string} accountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @returns {TransferTransaction}
      */
     addHbarTransfer(accountId, amount) {
@@ -417,7 +417,7 @@ export default class TransferTransaction extends Transaction {
     /**
      * @internal
      * @param {AccountId | string} accountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @returns {TransferTransaction}
      */
     addApprovedHbarTransfer(accountId, amount) {

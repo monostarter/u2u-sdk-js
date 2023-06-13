@@ -8,7 +8,7 @@ import {
     TransactionId,
     AccountAllowanceApproveTransaction,
     TransferTransaction,
-    Hbar,
+    U2U,
 } from "@hashgraph/sdk";
 
 /**
@@ -40,7 +40,7 @@ async function main() {
 
     let transaction = await new AccountCreateTransaction()
         .setKey(aliceKey)
-        .setInitialBalance(new Hbar(5))
+        .setInitialBalance(new U2U(5))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
     const response = await transaction.executeWithSigner(wallet);
@@ -49,7 +49,7 @@ async function main() {
 
     transaction = await new AccountCreateTransaction()
         .setKey(bobKey)
-        .setInitialBalance(new Hbar(5))
+        .setInitialBalance(new U2U(5))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
 
@@ -61,7 +61,7 @@ async function main() {
 
     transaction = await new AccountCreateTransaction()
         .setKey(charlieKey)
-        .setInitialBalance(new Hbar(5))
+        .setInitialBalance(new U2U(5))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
 
@@ -78,7 +78,7 @@ async function main() {
     await printBalances(wallet, aliceId, bobId, charlieId);
 
     console.log(
-        "Approving an allowance of 2 Hbar with owner Alice and spender Bob"
+        "Approving an allowance of 2 U2U with owner Alice and spender Bob"
     );
 
     await (
@@ -86,7 +86,7 @@ async function main() {
             await (
                 await (
                     await new AccountAllowanceApproveTransaction()
-                        .approveHbarAllowance(aliceId, bobId, new Hbar(2))
+                        .approveHbarAllowance(aliceId, bobId, new U2U(2))
                         .freezeWithSigner(wallet)
                 ).sign(aliceKey)
             ).signWithSigner(wallet)
@@ -96,7 +96,7 @@ async function main() {
     await printBalances(wallet, aliceId, bobId, charlieId);
 
     console.log(
-        "Transferring 1 Hbar from Alice to Charlie, but the transaction is signed _only_ by Bob (Bob is dipping into his allowance from Alice)"
+        "Transferring 1 U2U from Alice to Charlie, but the transaction is signed _only_ by Bob (Bob is dipping into his allowance from Alice)"
     );
 
     await (
@@ -105,8 +105,8 @@ async function main() {
                 await (
                     await new TransferTransaction()
                         // "addApproved*Transfer()" means that the transfer has been approved by an allowance
-                        .addApprovedHbarTransfer(aliceId, new Hbar(1).negated())
-                        .addHbarTransfer(charlieId, new Hbar(1))
+                        .addApprovedHbarTransfer(aliceId, new U2U(1).negated())
+                        .addHbarTransfer(charlieId, new U2U(1))
                         // The allowance spender must be pay the fee for the transaction.
                         // use setTransactionId() to set the account ID that will pay the fee for the transaction.
                         .setTransactionId(TransactionId.generate(bobId))
@@ -117,17 +117,17 @@ async function main() {
     ).getReceiptWithSigner(wallet);
 
     console.log(
-        "Transfer succeeded.  Bob should now have 1 Hbar left in his allowance."
+        "Transfer succeeded.  Bob should now have 1 U2U left in his allowance."
     );
 
     await printBalances(wallet, aliceId, bobId, charlieId);
 
     try {
         console.log(
-            "Attempting to transfer 2 Hbar from Alice to Charlie using Bob's allowance."
+            "Attempting to transfer 2 U2U from Alice to Charlie using Bob's allowance."
         );
         console.log(
-            "This should fail, because there is only 1 Hbar left in Bob's allowance."
+            "This should fail, because there is only 1 U2U left in Bob's allowance."
         );
 
         await (
@@ -137,9 +137,9 @@ async function main() {
                         await new TransferTransaction()
                             .addApprovedHbarTransfer(
                                 aliceId,
-                                new Hbar(2).negated()
+                                new U2U(2).negated()
                             )
-                            .addHbarTransfer(charlieId, new Hbar(2))
+                            .addHbarTransfer(charlieId, new U2U(2))
                             .setTransactionId(TransactionId.generate(bobId))
                             .freezeWithSigner(wallet)
                     ).sign(bobKey)
@@ -153,14 +153,14 @@ async function main() {
         console.log(/** @type {Error} */ (error).message);
     }
 
-    console.log("Adjusting Bob's allowance to 3 Hbar.");
+    console.log("Adjusting Bob's allowance to 3 U2U.");
 
     await (
         await (
             await (
                 await (
                     await new AccountAllowanceApproveTransaction()
-                        .approveHbarAllowance(aliceId, bobId, new Hbar(3))
+                        .approveHbarAllowance(aliceId, bobId, new U2U(3))
                         .freezeWithSigner(wallet)
                 ).sign(aliceKey)
             ).signWithSigner(wallet)
@@ -168,7 +168,7 @@ async function main() {
     ).getReceiptWithSigner(wallet);
 
     console.log(
-        "Attempting to transfer 2 Hbar from Alice to Charlie using Bob's allowance again."
+        "Attempting to transfer 2 U2U from Alice to Charlie using Bob's allowance again."
     );
     console.log("This time it should succeed.");
 
@@ -177,8 +177,8 @@ async function main() {
             await (
                 await (
                     await new TransferTransaction()
-                        .addApprovedHbarTransfer(aliceId, new Hbar(2).negated())
-                        .addHbarTransfer(charlieId, new Hbar(2))
+                        .addApprovedHbarTransfer(aliceId, new U2U(2).negated())
+                        .addHbarTransfer(charlieId, new U2U(2))
                         .setTransactionId(TransactionId.generate(bobId))
                         .freezeWithSigner(wallet)
                 ).sign(bobKey)
@@ -200,7 +200,7 @@ async function main() {
                         .approveHbarAllowance(
                             aliceId,
                             bobId,
-                            Hbar.fromTinybars(0)
+                            U2U.fromTinyU2U(0)
                         )
                         .freezeWithSigner(wallet)
                 ).sign(aliceKey)

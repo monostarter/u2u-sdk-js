@@ -4,7 +4,7 @@ import {
     PrivateKey,
     KeyList,
     AccountCreateTransaction,
-    Hbar,
+    U2U,
     AccountBalanceQuery,
     TransferTransaction,
     ScheduleSignTransaction,
@@ -51,7 +51,7 @@ async function main() {
     // create multi-sig account
     let transaction = await new AccountCreateTransaction()
         .setKey(thresholdKey)
-        .setInitialBalance(Hbar.fromTinybars(1))
+        .setInitialBalance(U2U.fromTinyU2U(1))
         .setAccountMemo("3-of-4 multi-sig account")
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
@@ -71,10 +71,10 @@ async function main() {
         await (
             await (
                 await new TransferTransaction()
-                    .addHbarTransfer(multiSigAccountId, Hbar.fromTinybars(-1))
+                    .addHbarTransfer(multiSigAccountId, U2U.fromTinyU2U(-1))
                     .addHbarTransfer(
                         wallet.getAccountId(),
-                        Hbar.fromTinybars(1)
+                        U2U.fromTinyU2U(1)
                     )
                     .schedule() // create schedule
                     .freezeWithSigner(wallet)

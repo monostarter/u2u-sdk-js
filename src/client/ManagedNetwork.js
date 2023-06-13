@@ -90,64 +90,10 @@ export default class ManagedNetwork {
         /** @type {number} */
         this._maxNodeAttempts = -1;
 
-        this._transportSecurity = false;
-
         this._nodeMinReadmitPeriod = this._minBackoff;
         this._nodeMaxReadmitPeriod = this._maxBackoff;
 
         this._earliestReadmitTime = Date.now() + this._nodeMinReadmitPeriod;
-    }
-
-    /**
-     * @returns {boolean}
-     */
-    isTransportSecurity() {
-        return this._transportSecurity;
-    }
-
-    /**
-     * @param {boolean} transportSecurity
-     * @returns {this}
-     */
-    setTransportSecurity(transportSecurity) {
-        if (this._transportSecurity == transportSecurity) {
-            return this;
-        }
-
-        this._network.clear();
-
-        for (let i = 0; i < this._nodes.length; i++) {
-            let node = this._nodes[i];
-            node.close();
-
-            node = /** @type {NetworkNodeT} */ (
-                transportSecurity
-                    ? node
-                          .toSecure()
-                          .setCert(
-                              this._ledgerId != null
-                                  ? this._ledgerId.toString()
-                                  : ""
-                          )
-                    : node.toInsecure()
-            );
-            this._nodes[i] = node;
-
-            const nodes =
-                this._network.get(node.getKey()) != null
-                    ? /** @type {NetworkNodeT[]} */ (
-                          this._network.get(node.getKey())
-                      )
-                    : [];
-            nodes.push(node);
-            this._network.set(node.getKey(), nodes);
-        }
-
-        // Overwrite healthy node list since new ports might make the node work again
-        this._healthyNodes = [...this._nodes];
-
-        this._transportSecurity = transportSecurity;
-        return this;
     }
 
     /**
@@ -249,6 +195,9 @@ export default class ManagedNetwork {
                 searchForNextEarliestReadmitTime = false;
 
                 if (this._nodes[i]._readmitTime <= now) {
+                    // Decrement the unhealthy node count because the readmit time of the node
+                    // has expired and we return it to the list of healthy nodes
+                    this._unhealthyNodesCount--;
                     this._healthyNodes.push(this._nodes[i]);
                 }
             }
@@ -285,7 +234,10 @@ export default class ManagedNetwork {
         // `this._healthyNodes.length` times. This can result in a shorter
         // list than `count`, but that is much better than running forever
         for (let i = 0; i < this._healthyNodes.length; i++) {
-            if (nodes.length == count - this._unhealthyNodesCount) {
+            if (
+                nodes.length == count - this._unhealthyNodesCount &&
+                nodes.length !== 0
+            ) {
                 break;
             }
 
@@ -533,6 +485,8 @@ export default class ManagedNetwork {
         for (let i = 0; i < this._healthyNodes.length; i++) {
             if (this._healthyNodes[i] == node) {
                 this._healthyNodes.splice(i, 1);
+                // Increment the unhealthy node count because we
+                // remove the current node from the healthy list
                 this._unhealthyNodesCount++;
             }
         }

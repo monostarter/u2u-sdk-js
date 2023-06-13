@@ -32,7 +32,7 @@ export default class ContractHelper {
         /** @type {Map<number, () => hashgraph.ContractFunctionParameters>} */
         this.stepParameterSuppliers = new Map();
 
-        /** @type {Map<number, hashgraph.Hbar>} */
+        /** @type {Map<number, hashgraph.U2U>} */
         this.stepPayableAmounts = new Map();
 
         /** @type {Map<number, hashgraph.PrivateKey[]>} */
@@ -82,7 +82,7 @@ export default class ContractHelper {
 
     /**
      * @param {number} stepIndex
-     * @param {hashgraph.Hbar} amount
+     * @param {hashgraph.U2U} amount
      * @returns {this}
      */
     setPayableAmountForStep(stepIndex, amount) {
@@ -156,7 +156,7 @@ export default class ContractHelper {
     /**
      * @private
      * @param {number} stepIndex
-     * @returns {hashgraph.Hbar}
+     * @returns {hashgraph.U2U}
      */
     getPayableAmount(stepIndex) {
         return this.stepPayableAmounts.get(stepIndex);

@@ -18,7 +18,7 @@
  * ‍
  */
 
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import Transaction, {
     TRANSACTION_REGISTRY,
 } from "../transaction/Transaction.js";
@@ -30,13 +30,13 @@ import List from "../transaction/List.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.IFileAppendTransactionBody} HashgraphProto.proto.IFileAppendTransactionBody
- * @typedef {import("@hashgraph/proto").proto.IFileID} HashgraphProto.proto.IFileID
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.IFileAppendTransactionBody} HashgraphProto.proto.IFileAppendTransactionBody
+ * @typedef {import("@u2u/proto").proto.IFileID} HashgraphProto.proto.IFileID
  */
 
 /**
@@ -87,7 +87,7 @@ export default class FileAppendTransaction extends Transaction {
          */
         this._chunkSize = 4096;
 
-        this._defaultMaxTransactionFee = new Hbar(5);
+        this._defaultMaxTransactionFee = new U2U(5);
 
         if (props.fileId != null) {
             this.setFileId(props.fileId);

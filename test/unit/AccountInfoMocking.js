@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import {
-    Hbar,
+    U2U,
     MaxQueryPaymentExceeded,
     AccountInfoQuery,
     AccountId,
@@ -10,7 +10,7 @@ import {
 } from "../../src/index.js";
 import Mocker, { UNAVAILABLE, INTERNAL, PRIVATE_KEY } from "./Mocker.js";
 import Long from "long";
-import { proto } from "@hashgraph/proto";
+import { proto } from "@u2u/proto";
 import * as hex from "../../src/encoding/hex.js";
 
 const ACCOUNT_INFO_QUERY_COST_RESPONSE = {
@@ -125,7 +125,7 @@ describe("AccountInfoMocking", function () {
             ],
         ]));
 
-        client.setMaxQueryPayment(Hbar.fromTinybars(10));
+        client.setMaxQueryPayment(U2U.fromTinyU2U(10));
 
         let err = false;
 
@@ -149,7 +149,7 @@ describe("AccountInfoMocking", function () {
 
         const query = new AccountInfoQuery()
             .setAccountId("0.0.3")
-            .setQueryPayment(Hbar.fromTinybars(10));
+            .setQueryPayment(U2U.fromTinyU2U(10));
 
         await query.execute(client, 1);
 
@@ -165,8 +165,8 @@ describe("AccountInfoMocking", function () {
 
         const query = new AccountInfoQuery()
             .setAccountId("0.0.3")
-            .setMaxQueryPayment(Hbar.fromTinybars(1))
-            .setQueryPayment(Hbar.fromTinybars(10));
+            .setMaxQueryPayment(U2U.fromTinyU2U(1))
+            .setQueryPayment(U2U.fromTinyU2U(10));
 
         await query.execute(client, 1);
 
@@ -183,7 +183,7 @@ describe("AccountInfoMocking", function () {
             ],
         ]));
 
-        client.setMaxQueryPayment(Hbar.fromTinybars(24));
+        client.setMaxQueryPayment(U2U.fromTinyU2U(24));
 
         let err = false;
 
@@ -211,7 +211,7 @@ describe("AccountInfoMocking", function () {
         let err = false;
 
         const query = new AccountInfoQuery()
-            .setMaxQueryPayment(Hbar.fromTinybars(24))
+            .setMaxQueryPayment(U2U.fromTinyU2U(24))
             .setAccountId("0.0.3");
 
         try {
@@ -238,7 +238,7 @@ describe("AccountInfoMocking", function () {
         try {
             await new AccountInfoQuery()
                 .setAccountId("0.0.3")
-                .setMaxQueryPayment(Hbar.fromTinybars(28))
+                .setMaxQueryPayment(U2U.fromTinyU2U(28))
                 .execute(client, 1);
         } catch (error) {
             err = error instanceof MaxQueryPaymentExceeded;
@@ -399,7 +399,7 @@ describe("AccountInfoMocking", function () {
         } catch (error) {
             if (
                 error.message !==
-                "transaction 0.0.1854@1651168054.29348185 failed precheck with status TRANSACTION_EXPIRED"
+                "transaction 0.0.1854@1651168054.029348185 failed precheck with status TRANSACTION_EXPIRED"
             ) {
                 throw error;
             }

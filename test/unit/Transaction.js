@@ -2,7 +2,7 @@ import {
     AccountCreateTransaction,
     AccountId,
     FileCreateTransaction,
-    Hbar,
+    U2U,
     PrivateKey,
     Timestamp,
     Transaction,
@@ -10,7 +10,7 @@ import {
 } from "../../src/index.js";
 import * as hex from "../../src/encoding/hex.js";
 import Client from "../../src/client/NodeClient.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 import Long from "long";
 
 describe("Transaction", function () {
@@ -70,13 +70,13 @@ describe("Transaction", function () {
                 .get(new AccountId(476260))
                 .toTinybars()
                 .toString()
-        ).to.be.equal(new Hbar(1).negated().toTinybars().toString());
+        ).to.be.equal(new U2U(1).negated().toTinybars().toString());
         expect(
             transaction.hbarTransfers
                 .get(new AccountId(476267))
                 .toTinybars()
                 .toString()
-        ).to.be.equal(new Hbar(1).toTinybars().toString());
+        ).to.be.equal(new U2U(1).toTinybars().toString());
     });
 
     it("sign", async function () {
@@ -111,7 +111,7 @@ describe("Transaction", function () {
         const nodeAccountId = new AccountId(3);
         const client = Client.forTestnet({
             scheduleNetworkUpdate: false,
-        }).setMaxTransactionFee(Hbar.fromTinybars(1));
+        }).setMaxTransactionFee(U2U.fromTinyU2U(1));
 
         const transaction = new FileCreateTransaction()
             .setNodeAccountIds([nodeAccountId])

@@ -19,11 +19,11 @@
  */
 
 import Long from "long";
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import TokenId from "../token/TokenId.js";
 import TokenBalanceMap from "./TokenBalanceMap.js";
 import TokenDecimalMap from "./TokenDecimalMap.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 
 /**
  * @typedef {object} TokenBalanceJson
@@ -42,7 +42,7 @@ export default class AccountBalance {
     /**
      * @private
      * @param {object} props
-     * @param {Hbar} props.hbars
+     * @param {U2U} props.hbars
      * @param {?TokenBalanceMap} props.tokens
      * @param {?TokenDecimalMap} props.tokenDecimals
      */
@@ -110,7 +110,7 @@ export default class AccountBalance {
         }
 
         return new AccountBalance({
-            hbars: Hbar.fromTinybars(
+            hbars: U2U.fromTinyU2U(
                 /** @type {Long} */ (accountBalance.balance)
             ),
             tokens: tokenBalances,

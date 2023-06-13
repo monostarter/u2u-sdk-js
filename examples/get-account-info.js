@@ -1,4 +1,4 @@
-import { Wallet, LocalProvider, AccountInfoQuery, Hbar } from "@hashgraph/sdk";
+import { Wallet, LocalProvider, AccountInfoQuery, U2U } from "@hashgraph/sdk";
 
 import dotenv from "dotenv";
 
@@ -19,7 +19,7 @@ async function main() {
 
     const info = await new AccountInfoQuery()
         .setAccountId(wallet.getAccountId())
-        .setQueryPayment(new Hbar(1))
+        .setQueryPayment(new U2U(1))
         .executeWithSigner(wallet);
 
     console.log(`info.key                          = ${info.key.toString()}`);

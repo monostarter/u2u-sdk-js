@@ -20,17 +20,14 @@
 
 import CustomFee from "./CustomFee.js";
 import AccountId from "../account/AccountId.js";
+import FeeAssessmentMethod from "./FeeAssessmentMethod.js";
 import Long from "long";
 
 /**
- * @typedef {import("./FeeAssessmentMethod.js").default} FeeAssessmentMethod
- */
-
-/**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ICustomFee} HashgraphProto.proto.ICustomFee
- * @typedef {import("@hashgraph/proto").proto.IFractionalFee} HashgraphProto.proto.IFractionalFee
- * @typedef {import("@hashgraph/proto").proto.IFraction} HashgraphProto.proto.IFraction
+ * @typedef {import("@u2u/proto").proto.ICustomFee} HashgraphProto.proto.ICustomFee
+ * @typedef {import("@u2u/proto").proto.IFractionalFee} HashgraphProto.proto.IFractionalFee
+ * @typedef {import("@u2u/proto").proto.IFraction} HashgraphProto.proto.IFraction
  */
 
 export default class CustomFractionalFee extends CustomFee {
@@ -211,6 +208,10 @@ export default class CustomFractionalFee extends CustomFee {
                     : undefined,
             min: fee.minimumAmount != null ? fee.minimumAmount : undefined,
             max: fee.maximumAmount != null ? fee.maximumAmount : undefined,
+            assessmentMethod:
+                fee.netOfTransfers != null
+                    ? new FeeAssessmentMethod(fee.netOfTransfers)
+                    : undefined,
         });
     }
 
@@ -233,6 +234,10 @@ export default class CustomFractionalFee extends CustomFee {
                 },
                 minimumAmount: this._min,
                 maximumAmount: this._max,
+                netOfTransfers:
+                    this._assessmentMethod != null
+                        ? this._assessmentMethod.valueOf()
+                        : false,
             },
         };
     }

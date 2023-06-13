@@ -4,7 +4,7 @@ import {
     CustomFixedFee,
     CustomFractionalFee,
     CustomRoyaltyFee,
-    Hbar,
+    U2U,
     KeyList,
     PrivateKey,
     Status,
@@ -319,7 +319,7 @@ describe("CustomFees", function () {
             await (
                 await new AccountCreateTransaction()
                     .setKey(key)
-                    .setInitialBalance(new Hbar(2))
+                    .setInitialBalance(new U2U(2))
                     .execute(env.client)
             ).getReceipt(env.client)
         ).accountId;
@@ -561,7 +561,7 @@ describe("CustomFees", function () {
             await (
                 await new AccountCreateTransaction()
                     .setKey(key)
-                    .setInitialBalance(new Hbar(2))
+                    .setInitialBalance(new U2U(2))
                     .execute(env.client)
             ).getReceipt(env.client)
         ).accountId;
@@ -660,7 +660,7 @@ describe("CustomFees", function () {
             await (
                 await new AccountCreateTransaction()
                     .setKey(key)
-                    .setInitialBalance(new Hbar(2))
+                    .setInitialBalance(new U2U(2))
                     .execute(env.client)
             ).getReceipt(env.client)
         ).accountId;
@@ -1055,7 +1055,7 @@ describe("CustomFees", function () {
             await (
                 await new AccountCreateTransaction()
                     .setKey(key)
-                    .setInitialBalance(new Hbar(2))
+                    .setInitialBalance(new U2U(2))
                     .execute(env.client)
             ).getReceipt(env.client)
         ).accountId;
@@ -1064,7 +1064,7 @@ describe("CustomFees", function () {
             await (
                 await new AccountCreateTransaction()
                     .setKey(key)
-                    .setInitialBalance(new Hbar(2))
+                    .setInitialBalance(new U2U(2))
                     .execute(env.client)
             ).getReceipt(env.client)
         ).accountId;

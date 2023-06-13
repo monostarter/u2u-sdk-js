@@ -18,7 +18,7 @@
  * ‍
  */
 
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import TransactionResponse from "./TransactionResponse.js";
 import TransactionId from "./TransactionId.js";
 import TransactionHashMap from "./TransactionHashMap.js";
@@ -28,13 +28,12 @@ import Status from "../Status.js";
 import Long from "long";
 import * as sha384 from "../cryptography/sha384.js";
 import * as hex from "../encoding/hex.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 import PrecheckStatusError from "../PrecheckStatusError.js";
 import AccountId from "../account/AccountId.js";
 import PublicKey from "../PublicKey.js";
 import List from "./List.js";
 import Timestamp from "../Timestamp.js";
-import Logger from "js-logger";
 import * as util from "../util.js";
 
 /**
@@ -53,7 +52,7 @@ import * as util from "../util.js";
 export const DEFAULT_AUTO_RENEW_PERIOD = Long.fromValue(7776000);
 
 // maximum value of i64 (so there is never a record generated)
-export const DEFAULT_RECORD_THRESHOLD = Hbar.fromTinybars(
+export const DEFAULT_RECORD_THRESHOLD = U2U.fromTinyU2U(
     Long.fromString("9223372036854775807")
 );
 
@@ -133,9 +132,9 @@ export default class Transaction extends Executable {
          * as `TokenCreateTransaction` need to use a different default value.
          *
          * @protected
-         * @type {Hbar}
+         * @type {U2U}
          */
-        this._defaultMaxTransactionFee = new Hbar(2);
+        this._defaultMaxTransactionFee = new U2U(2);
 
         /**
          * The max transaction fee on the request. This field is what users are able
@@ -144,7 +143,7 @@ export default class Transaction extends Executable {
          * using the default max transation fee for the request.
          *
          * @private
-         * @type {Hbar | null}
+         * @type {U2U | null}
          */
         this._maxTransactionFee = null;
 
@@ -422,8 +421,8 @@ export default class Transaction extends Executable {
                 : DEFAULT_TRANSACTION_VALID_DURATION;
         transaction._maxTransactionFee =
             body.transactionFee != null
-                ? Hbar.fromTinybars(body.transactionFee)
-                : new Hbar(0);
+                ? U2U.fromTinyU2U(body.transactionFee)
+                : new U2U(0);
         transaction._transactionMemo = body.memo != null ? body.memo : "";
 
         // Loop over a single row of `signedTransactions` and add all the public
@@ -499,7 +498,7 @@ export default class Transaction extends Executable {
     /**
      * Get the max transaction fee
      *
-     * @returns {?Hbar}
+     * @returns {?U2U}
      */
     get maxTransactionFee() {
         return this._maxTransactionFee;
@@ -509,15 +508,15 @@ export default class Transaction extends Executable {
      * Set the maximum transaction fee the operator (paying account)
      * is willing to pay.
      *
-     * @param {number | string | Long | BigNumber | Hbar} maxTransactionFee
+     * @param {number | string | Long | BigNumber | U2U} maxTransactionFee
      * @returns {this}
      */
     setMaxTransactionFee(maxTransactionFee) {
         this._requireNotFrozen();
         this._maxTransactionFee =
-            maxTransactionFee instanceof Hbar
+            maxTransactionFee instanceof U2U
                 ? maxTransactionFee
-                : new Hbar(maxTransactionFee);
+                : new U2U(maxTransactionFee);
 
         return this;
     }
@@ -1159,6 +1158,9 @@ export default class Transaction extends Executable {
      * @returns {Promise<void>}
      */
     async _beforeExecute(client) {
+        this._logger?.info(
+            `Network used: ${client._network.networkName}` // eslint-disable-line @typescript-eslint/restrict-template-expressions
+        );
         // Make sure we're frozen
         if (!this._isFrozen()) {
             this.freezeWith(client);
@@ -1374,8 +1376,11 @@ export default class Transaction extends Executable {
                 : HashgraphProto.proto.ResponseCodeEnum.OK
         );
 
-        Logger.debug(
+        this._logger?.debug(
             `[${this._getLogId()}] received status ${status.toString()}`
+        );
+        this._logger?.info(
+            `SDK Transaction Status Response: ${status.toString()}`
         );
 
         // Based on the status what execution state are we in
@@ -1421,6 +1426,10 @@ export default class Transaction extends Executable {
                 : HashgraphProto.proto.ResponseCodeEnum.OK
         );
 
+        this._logger?.info(
+            `Transaction Error Info: ${status.toString()}, ${this.transactionId?.toString()}` // eslint-disable-line @typescript-eslint/restrict-template-expressions
+        );
+
         return new PrecheckStatusError({
             status,
             transactionId: this._getTransactionId(),
@@ -1446,6 +1455,16 @@ export default class Transaction extends Executable {
 
         this._transactionIds.advance();
 
+        this._logger?.info(
+            `Transaction Info: ${JSON.stringify(
+                new TransactionResponse({
+                    nodeId,
+                    transactionHash,
+                    transactionId,
+                }).toJSON()
+            )}`
+        );
+
         return new TransactionResponse({
             nodeId,
             transactionHash,
@@ -1454,7 +1473,7 @@ export default class Transaction extends Executable {
     }
 
     /**
-     * Make a signed tranaction given a node account ID
+     * Make a signed transaction given a node account ID
      *
      * @internal
      * @param {?AccountId} nodeId
@@ -1462,6 +1481,7 @@ export default class Transaction extends Executable {
      */
     _makeSignedTransaction(nodeId) {
         const body = this._makeTransactionBody(nodeId);
+        this._logger?.info(`Transaction Body: ${JSON.stringify(body)}`);
         const bodyBytes =
             HashgraphProto.proto.TransactionBody.encode(body).finish();
 

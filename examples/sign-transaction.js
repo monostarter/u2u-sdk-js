@@ -3,7 +3,7 @@ import {
     LocalProvider,
     PrivateKey,
     AccountCreateTransaction,
-    Hbar,
+    U2U,
     AccountId,
     KeyList,
     TransferTransaction,
@@ -36,7 +36,7 @@ async function main() {
     const keyList = new KeyList([user1Key, user2Key]);
 
     let transaction = await new AccountCreateTransaction()
-        .setInitialBalance(new Hbar(2)) // 5 h
+        .setInitialBalance(new U2U(2)) // 5 h
         .setKey(keyList)
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);

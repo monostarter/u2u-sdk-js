@@ -2,7 +2,7 @@ import {
     AccountCreateTransaction,
     AccountDeleteTransaction,
     AccountInfoQuery,
-    Hbar,
+    U2U,
     PrivateKey,
     Status,
     TokenCreateTransaction,
@@ -35,7 +35,7 @@ describe("AccountInfo", function () {
         const newKey = PrivateKey.generate();
 
         let createTransaction = await new AccountCreateTransaction()
-            .setInitialBalance(new Hbar(10)) // 10 h
+            .setInitialBalance(new U2U(10)) // 10 h
             .setKey(newKey.publicKey)
             .execute(env.client);
 
@@ -77,7 +77,7 @@ describe("AccountInfo", function () {
 
         const response = await new AccountCreateTransaction()
             .setKey(key.publicKey)
-            .setInitialBalance(new Hbar(2))
+            .setInitialBalance(new U2U(2))
             .execute(env.client);
 
         const receipt = await response.getReceipt(env.client);
@@ -93,7 +93,7 @@ describe("AccountInfo", function () {
         expect(info.isDeleted).to.be.false;
         expect(info.key.toString()).to.be.equal(key.publicKey.toString());
         expect(info.balance.toTinybars().toInt()).to.be.equal(
-            new Hbar(2).toTinybars().toInt()
+            new U2U(2).toTinybars().toInt()
         );
         expect(info.autoRenewPeriod.seconds.toNumber()).to.be.equal(7776000);
         expect(info.proxyAccountId).to.be.null;
@@ -124,7 +124,7 @@ describe("AccountInfo", function () {
         for (let i = 0; i < 300; i++) {
             response[i] = await new AccountCreateTransaction()
                 .setKey(key.publicKey)
-                .setInitialBalance(new Hbar(2))
+                .setInitialBalance(new U2U(2))
                 .execute(env.client);
         }
 

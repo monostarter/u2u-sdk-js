@@ -19,11 +19,11 @@
  */
 
 import TransactionId from "../transaction/TransactionId.js";
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import Executable from "../Executable.js";
 import AccountId from "../account/AccountId.js";
 import { _makePaymentTransaction, COST_QUERY } from "./Query.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 
 /**
  * @typedef {import("../channel/Channel.js").default} Channel
@@ -33,7 +33,7 @@ import * as HashgraphProto from "@hashgraph/proto";
 
 /**
  * @template OutputT
- * @augments {Executable<HashgraphProto.proto.IQuery, HashgraphProto.proto.IResponse, Hbar>}
+ * @augments {Executable<HashgraphProto.proto.IQuery, HashgraphProto.proto.IResponse, U2U>}
  */
 export default class CostQuery extends Executable {
     /**
@@ -100,14 +100,23 @@ export default class CostQuery extends Executable {
             this._query.setPaymentTransactionId(transactionId);
         }
 
+        const logId = this._getLogId();
+        const nodeId = new AccountId(0);
+        const paymentTransactionId =
+            /** @type {import("../transaction/TransactionId.js").default} */
+            (TransactionId.generate(new AccountId(0)));
+        const paymentAmount = new U2U(0);
+
+        this._logger?.debug(
+            `[${logId}] making a payment transaction for node ${nodeId.toString()} and transaction ID ${paymentTransactionId.toString()} with amount ${paymentAmount.toString()}`
+        );
+
         this._header = {
             payment: await _makePaymentTransaction(
-                this._getLogId(),
-                /** @type {import("../transaction/TransactionId.js").default} */
-                (TransactionId.generate(new AccountId(0))),
+                paymentTransactionId,
                 new AccountId(0),
                 operator,
-                new Hbar(0)
+                paymentAmount
             ),
             responseType: HashgraphProto.proto.ResponseType.COST_ANSWER,
         };
@@ -156,13 +165,13 @@ export default class CostQuery extends Executable {
      * @param {HashgraphProto.proto.IResponse} response
      * @param {AccountId} nodeAccountId
      * @param {HashgraphProto.proto.IQuery} request
-     * @returns {Promise<Hbar>}
+     * @returns {Promise<U2U>}
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _mapResponse(response, nodeAccountId, request) {
         const cost = this._query._mapResponseHeader(response).cost;
         return Promise.resolve(
-            Hbar.fromTinybars(/** @type {Long | number} */ (cost))
+            U2U.fromTinyU2U(/** @type {Long | number} */ (cost))
         );
     }
 

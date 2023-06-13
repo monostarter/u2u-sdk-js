@@ -22,17 +22,17 @@ import Query, { QUERY_REGISTRY } from "../query/Query.js";
 import ScheduleId from "./ScheduleId.js";
 import ScheduleInfo from "./ScheduleInfo.js";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.IQuery} HashgraphProto.proto.IQuery
- * @typedef {import("@hashgraph/proto").proto.IQueryHeader} HashgraphProto.proto.IQueryHeader
- * @typedef {import("@hashgraph/proto").proto.IResponse} HashgraphProto.proto.IResponse
- * @typedef {import("@hashgraph/proto").proto.IResponseHeader} HashgraphProto.proto.IResponseHeader
- * @typedef {import("@hashgraph/proto").proto.IScheduleInfo} HashgraphProto.proto.IScheduleInfo
- * @typedef {import("@hashgraph/proto").proto.IScheduleGetInfoQuery} HashgraphProto.proto.IScheduleGetInfoQuery
- * @typedef {import("@hashgraph/proto").proto.IScheduleGetInfoResponse} HashgraphProto.proto.IScheduleGetInfoResponse
+ * @typedef {import("@u2u/proto").proto.IQuery} HashgraphProto.proto.IQuery
+ * @typedef {import("@u2u/proto").proto.IQueryHeader} HashgraphProto.proto.IQueryHeader
+ * @typedef {import("@u2u/proto").proto.IResponse} HashgraphProto.proto.IResponse
+ * @typedef {import("@u2u/proto").proto.IResponseHeader} HashgraphProto.proto.IResponseHeader
+ * @typedef {import("@u2u/proto").proto.IScheduleInfo} HashgraphProto.proto.IScheduleInfo
+ * @typedef {import("@u2u/proto").proto.IScheduleGetInfoQuery} HashgraphProto.proto.IScheduleGetInfoQuery
+ * @typedef {import("@u2u/proto").proto.IScheduleGetInfoResponse} HashgraphProto.proto.IScheduleGetInfoResponse
  */
 
 /**
@@ -105,7 +105,7 @@ export default class ScheduleInfoQuery extends Query {
     /**
      * @override
      * @param {import("../client/Client.js").default<Channel, *>} client
-     * @returns {Promise<Hbar>}
+     * @returns {Promise<U2U>}
      */
     async getCost(client) {
         return super.getCost(client);

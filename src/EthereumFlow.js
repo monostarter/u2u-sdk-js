@@ -18,7 +18,7 @@
  * ‍
  */
 
-import Hbar from "./Hbar.js";
+import U2U from "./U2U.js";
 import EthereumTransaction from "./EthereumTransaction.js";
 import EthereumTransactionData from "./EthereumTransactionData.js";
 import FileCreateTransaction from "./file/FileCreateTransaction.js";
@@ -27,13 +27,13 @@ import * as hex from "./encoding/hex.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.IEthereumTransactionBody} HashgraphProto.proto.IEthereumTransactionBody
- * @typedef {import("@hashgraph/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.IEthereumTransactionBody} HashgraphProto.proto.IEthereumTransactionBody
+ * @typedef {import("@u2u/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
  */
 
 /**
@@ -41,6 +41,7 @@ import * as hex from "./encoding/hex.js";
  * @typedef {import("./account/AccountId.js").default} AccountId
  * @typedef {import("./file/FileId.js").default} FileId
  * @typedef {import("./channel/Channel.js").default} Channel
+ * @typedef {import("./channel/MirrorChannel.js").default} MirrorChannel
  * @typedef {import("./client/Client.js").default<*, *>} Client
  * @typedef {import("./Timestamp.js").default} Timestamp
  * @typedef {import("./transaction/TransactionId.js").default} TransactionId
@@ -56,7 +57,7 @@ export default class EthereumFlow {
      * @param {object} [props]
      * @param {Uint8Array} [props.ethereumData]
      * @param {FileId} [props.callData]
-     * @param {number | string | Long | BigNumber | Hbar} [props.maxGasAllowance]
+     * @param {number | string | Long | BigNumber | U2U} [props.maxGasAllowance]
      */
     constructor(props = {}) {
         /**
@@ -73,7 +74,7 @@ export default class EthereumFlow {
 
         /**
          * @private
-         * @type {?Hbar}
+         * @type {?U2U}
          */
         this._maxGasAllowance = null;
 
@@ -82,7 +83,7 @@ export default class EthereumFlow {
         }
 
         if (props.maxGasAllowance != null) {
-            this.setMaxGasAllowanceHbar(props.maxGasAllowance);
+            this.setMaxGasAllowanceU2U(props.maxGasAllowance);
         }
 
         this._maxChunks = null;
@@ -127,7 +128,7 @@ export default class EthereumFlow {
     }
 
     /**
-     * @returns {?Hbar}
+     * @returns {?U2U}
      */
     get maxGasAllowance() {
         return this._maxGasAllowance;
@@ -135,11 +136,11 @@ export default class EthereumFlow {
 
     /**
      * @deprecated - use masGasAllowanceHbar instead.
-     * @param {number | string | Long | BigNumber | Hbar} maxGasAllowance
+     * @param {number | string | Long | BigNumber | U2U} maxGasAllowance
      * @returns {this}
      */
     setMaxGasAllowance(maxGasAllowance) {
-        return this.setMaxGasAllowanceHbar(maxGasAllowance);
+        return this.setMaxGasAllowanceU2U(maxGasAllowance);
     }
 
     /**
@@ -156,20 +157,20 @@ export default class EthereumFlow {
      * price in the transaction was set to zero then the payer will be assessed
      * the entire fee.
      *
-     * @param {number | string | Long | BigNumber | Hbar} maxGasAllowance
+     * @param {number | string | Long | BigNumber | U2U} maxGasAllowance
      * @returns {this}
      */
-    setMaxGasAllowanceHbar(maxGasAllowance) {
+    setMaxGasAllowanceU2U(maxGasAllowance) {
         this._maxGasAllowance =
-            maxGasAllowance instanceof Hbar
+            maxGasAllowance instanceof U2U
                 ? maxGasAllowance
-                : new Hbar(maxGasAllowance);
+                : new U2U(maxGasAllowance);
         return this;
     }
 
     /**
      * @template {Channel} ChannelT
-     * @template MirrorChannelT
+     * @template {MirrorChannel} MirrorChannelT
      * @param {import("./client/Client.js").default<ChannelT, MirrorChannelT>} client
      * @returns {Promise<TransactionResponse>}
      */
@@ -184,7 +185,7 @@ export default class EthereumFlow {
         const ethereumTransactionDataBytes = this._ethereumData.toBytes();
 
         if (this._maxGasAllowance != null) {
-            ethereumTransaction.setMaxGasAllowanceHbar(this._maxGasAllowance);
+            ethereumTransaction.setMaxGasAllowanceU2U(this._maxGasAllowance);
         }
 
         if (this._callDataFileId != null) {
@@ -219,7 +220,7 @@ export default class EthereumFlow {
 
 /**
  * @template {Channel} ChannelT
- * @template MirrorChannelT
+ * @template {MirrorChannel} MirrorChannelT
  * @param {Uint8Array} callData
  * @param {import("./client/Client.js").default<ChannelT, MirrorChannelT>} client
  * @param {?number} maxChunks

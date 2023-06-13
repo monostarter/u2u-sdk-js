@@ -55,7 +55,7 @@
 ### Renamed `MirrorSubscriptionHandle` -> `SubscriptionHandle`
 
 ### Renamed `QueryBuilder` -> `Query`
-    * Changed `Promise<number> getCost(Client)` -> `Promise<Hbar> getCost(Client)`
+    * Changed `Promise<number> getCost(Client)` -> `Promise<U2U> getCost(Client)`
     * Removed `setPaymentTransaction()`
     * Removed `setQueryPayment(number)`
     * Removed `setMaxQueryPayment(number)`
@@ -64,7 +64,7 @@
     * Added `fromBytes(Uint8Array): Transaction`
     * Added `toBytes(): Uint8Array`
     * Added `transactionId: TransactionId`
-    * Added `maxTransactionFee: Hbar`
+    * Added `maxTransactionFee: U2U`
     * Added `transactionMemo: string`
     * Added `Map<AccountId, Uint8Array> getTransactionHashPerNode()`
     * Added `transactionValidDuration: Duration`
@@ -78,27 +78,27 @@
     * Removed `id: TransactionId`
     * Removed `setMaxQueryPayment(number)`
     * Renamed `setNodeId(AccountId)` -> `setNodeAccountIds(AccountId[])`
-    * Removed `Promise<Hbar> getCost(Client)`
+    * Removed `Promise<U2U> getCost(Client)`
     * Removed `setGenerateRecord(boolean)`
 
 ### `AccountBalanceQuery` extends [Query](#renamed-querybuilder-query)
     * Added `accountId: AccountId`
     * Added `contractId: ContractId`
     * Added `setContractId(ContractId)`
-    * Changed `execute(Client)` -> `AccountBalance execute(Client): Hbar`
+    * Changed `execute(Client)` -> `AccountBalance execute(Client): U2U`
 
 ### Added `AccountBalance`
-    * Added `balance: Hbar`
+    * Added `balance: U2U`
     * Added `Map<TokenId, number> tokenBalances`
 
 ### `AccountCreateTransaction` extends [Transaction](#combined-transactionbuilder-and-transaction)
     * Added `key: Key`
-    * Added `initialBalance: Hbar`
+    * Added `initialBalance: U2U`
     * Added `receiverSignatureRequired: boolean`
     * Added `proxyAccountId: AccountId`
     * Added `autoRenewPeriod: Duration`
-    * Removed `setSendRecordThreshold(number)` and `setSendRecordThreshold(Hbar)`
-    * Removed `setReceiveRecordThreshold(number)` and `setReceiveRecordThreshold(Hbar)`
+    * Removed `setSendRecordThreshold(number)` and `setSendRecordThreshold(U2U)`
+    * Removed `setReceiveRecordThreshold(number)` and `setReceiveRecordThreshold(U2U)`
 
 ### `AccountDeleteTransaction` extends [Transaction](#combined-transactionbuilder-and-transaction)
     * Added `accountId: AccountId`
@@ -129,13 +129,13 @@
 ### `AccountUpdateTransaction` extends [Transaction](#combined-transactionbuilder-and-transaction)
     * Added `accountId: AccountId`
     * Added `key: Key`
-    * Added `initialBalance: Hbar`
+    * Added `initialBalance: U2U`
     * Added `receiverSignatureRequired: boolean`
     * Added `proxyAccountId: AccountId`
     * Added `autoRenewPeriod: Duration`
     * Added `expirationTime: Timestamp`
-    * Removed `setSendRecordThreshold(number)` and `setSendRecordThreshold(Hbar)`
-    * Removed `setReceiveRecordThreshold(number)` and `setReceiveRecordThreshold(Hbar)`
+    * Removed `setSendRecordThreshold(number)` and `setSendRecordThreshold(U2U)`
+    * Removed `setReceiveRecordThreshold(number)` and `setReceiveRecordThreshold(U2U)`
 
 ### Removed `CryptoTransferTranscation`
     * Use `TransferTransaction` instead.
@@ -143,8 +143,8 @@
 ### `TransferTransaction` extends [Transaction](#combined-transactionbuilder-and-transaction)
     * Added `addTokenTransfer(TokenId, AccountId, number): TransferTransaction`
     * Added `Map<TokenId, Map<AccountId, number>> getTokenTransfers()`
-    * Added `addHbarTransfer(AccountId, Hbar): TransferTransaction`
-    * Added `Map<AccountId, Hbar> getHbarTransfers()`
+    * Added `addHbarTransfer(AccountId, U2U): TransferTransaction`
+    * Added `Map<AccountId, U2U> getHbarTransfers()`
 
 ### Renamed `ContractBytecodeQuery` -> `ContractByteCodeQuery` extends [Query](#renamed-querybuilder-query)
     * Added `contractId: ContractId`
@@ -158,7 +158,7 @@
     * Added `bytecodeFileId: FileId`
     * Added `adminKey: Key`
     * Added `gas: number`
-    * Added `initialBalance: Hbar`
+    * Added `initialBalance: U2U`
     * Added `autoRenewDuration: Duration`
     * Added `proxyAccountId: AccountId`
     * Added `contractMemo: string`
@@ -172,7 +172,7 @@
 ### `ContractExecuteTransaction` extends [Transaction](#combined-transactionbuilder-and-transaction)
     * Added `contractId: ContractId`
     * Added `gas: number`
-    * Added `payableAmount: Hbar`
+    * Added `payableAmount: U2U`
     * Added `getFunctionParameters(): Uint8Array`
 
 ### `ContractId`
@@ -384,7 +384,7 @@
     * Added `endTime: { hour: number; minute: number }`
 
 ### Removed `HbarRangeError`
-    * If `Hbar` is out of range `Hedera` will error instead.
+    * If `U2U` is out of range `Hedera` will error instead.
 
 ### Removed `HederaError`
     * No replacement.
@@ -473,29 +473,29 @@
 ### `TransactionRecordQuery` extends [Query](#renamed-querybuilder-query)
     * Added `transactionId: TransactionId`
 
-### `Hbar`
-    * Added `fromString(string): Hbar`
-    * Added `fromString(string, HbarUnit): Hbar`
-    * Added `from(number, HbarUnit): Hbar`
-    * Added `from(BigDecimal, HbarUnit): Hbar`
+### `U2U`
+    * Added `fromString(string): U2U`
+    * Added `fromString(string, HbarUnit): U2U`
+    * Added `from(number, HbarUnit): U2U`
+    * Added `from(BigDecimal, HbarUnit): U2U`
     * Added `value: BigDecimal`
     * Added `toString(HbarUnit): string`
-    * Renamed `fromTinybar(number): Hbar` -> `fromTinybars(number): Hbar`
-    * Renamed `of(number): Hbar` -> `from(number): Hbar`
-    * Renamed `of(BigDecimal): Hbar` -> `from(BigDecimal): Hbar`
-    * Renamed `as(HbarUnit): Hbar` -> `to(HbarUnit): Hbar`
+    * Renamed `fromTinybar(number): U2U` -> `fromTinyU2U(number): U2U`
+    * Renamed `of(number): U2U` -> `from(number): U2U`
+    * Renamed `of(BigDecimal): U2U` -> `from(BigDecimal): U2U`
+    * Renamed `as(HbarUnit): U2U` -> `to(HbarUnit): U2U`
     * Renamed `asTinybar(): number` -> `toTinybars(): number`
-    * Renamed `negate(): Hbar` -> `negated(): Hbar`
-    * Removed `Hbar.MAX`
-    * Removed `Hbar.ZERO`
-    * Removed `Hbar.MIN`
-    * Removed `zero(): Hbar`
-        * Use `new Hbar(0)`
-    * Removed `value(): Hbar`
+    * Renamed `negate(): U2U` -> `negated(): U2U`
+    * Removed `U2U.MAX`
+    * Removed `U2U.ZERO`
+    * Removed `U2U.MIN`
+    * Removed `zero(): U2U`
+        * Use `new U2U(0)`
+    * Removed `value(): U2U`
         * Use `toTinybars()` instead.
     * Removed math functions.
-        * Use `Hbar.toTinybars()` to get tinybars, do math with the tinybars
-          then reconstructor the `Hbar` using `Hbar.fromTinbyars()`
+        * Use `U2U.toTinybars()` to get tinybars, do math with the tinybars
+          then reconstructor the `U2U` using `U2U.fromTinbyars()`
 
 ### `Client`
     * Added `setMirrorNetwork(string[]): void`

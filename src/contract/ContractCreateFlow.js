@@ -31,9 +31,10 @@ import PublicKey from "../PublicKey.js";
  * @typedef {import("../file/FileId.js").default} FileId
  * @typedef {import("../Key.js").default} Key
  * @typedef {import("./ContractFunctionParameters.js").default} ContractFunctionParameters
- * @typedef {import("../Hbar.js").default} Hbar
+ * @typedef {import("../U2U.js").default} U2U
  * @typedef {import("../Duration.js").default} Duration
  * @typedef {import("../channel/Channel.js").default} Channel
+ * @typedef {import("../channel/MirrorChannel.js").default} MirrorChannel
  * @typedef {import("../transaction/TransactionId.js").default} TransactionId
  * @typedef {import("../transaction/TransactionResponse.js").default} TransactionResponse
  * @typedef {import("../transaction/TransactionReceipt.js").default} TransactionReceipt
@@ -148,7 +149,7 @@ export default class ContractCreateFlow {
     }
 
     /**
-     * @returns {?Hbar}
+     * @returns {?U2U}
      */
     get initialBalance() {
         return this._contractCreate.initialBalance;
@@ -157,7 +158,7 @@ export default class ContractCreateFlow {
     /**
      * Set the initial amount to transfer into this contract.
      *
-     * @param {number | string | Long | BigNumber | Hbar} initialBalance
+     * @param {number | string | Long | BigNumber | U2U} initialBalance
      * @returns {this}
      */
     setInitialBalance(initialBalance) {
@@ -358,7 +359,7 @@ export default class ContractCreateFlow {
 
     /**
      * @template {Channel} ChannelT
-     * @template MirrorChannelT
+     * @template {MirrorChannel} MirrorChannelT
      * @param {import("../client/Client.js").default<ChannelT, MirrorChannelT>} client
      * @param {number=} requestTimeout
      * @returns {Promise<TransactionResponse>}

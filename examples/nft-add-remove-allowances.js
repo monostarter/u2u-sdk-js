@@ -3,7 +3,7 @@ import {
     PrivateKey,
     AccountId,
     NftId,
-    Hbar,
+    U2U,
     TransactionId,
     TokenType,
     TokenSupplyType,
@@ -94,7 +94,7 @@ async function main() {
     const spenderKey = PrivateKey.generateECDSA();
     const createSpenderTx = await new AccountCreateTransaction()
         .setKey(spenderKey)
-        .setInitialBalance(new Hbar(2))
+        .setInitialBalance(new U2U(2))
         .execute(client);
 
     const spenderAccountId = (await createSpenderTx.getReceipt(client))
@@ -105,7 +105,7 @@ async function main() {
     const receiverKey = PrivateKey.generateECDSA();
     const createReceiverTx = await new AccountCreateTransaction()
         .setKey(receiverKey)
-        .setInitialBalance(new Hbar(2))
+        .setInitialBalance(new U2U(2))
         .execute(client);
     const receiverAccountId = (await createReceiverTx.getReceipt(client))
         .accountId;
@@ -267,7 +267,7 @@ async function main() {
     const delegatingSpenderKey = PrivateKey.generateECDSA();
     const createDelegateSpenderTx = await new AccountCreateTransaction()
         .setKey(delegatingSpenderKey)
-        .setInitialBalance(new Hbar(2))
+        .setInitialBalance(new U2U(2))
         .execute(client);
 
     const delegatingSpenderAccountId = (
@@ -281,7 +281,7 @@ async function main() {
     const receiverKey2 = PrivateKey.generateECDSA();
     const createReceiverTx2 = await new AccountCreateTransaction()
         .setKey(receiverKey2)
-        .setInitialBalance(new Hbar(2))
+        .setInitialBalance(new U2U(2))
         .execute(client);
     const receiverAccountId2 = (await createReceiverTx2.getReceipt(client))
         .accountId;
@@ -348,7 +348,7 @@ async function main() {
     const spenderKey2 = PrivateKey.generateECDSA();
     const createSpenderTx2 = await new AccountCreateTransaction()
         .setKey(spenderKey2)
-        .setInitialBalance(new Hbar(2))
+        .setInitialBalance(new U2U(2))
         .execute(client);
 
     const spenderAccountId2 = (await createSpenderTx2.getReceipt(client))

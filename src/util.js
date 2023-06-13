@@ -22,7 +22,7 @@ import BigNumber from "bignumber.js";
 import Long from "long";
 
 /**
- * @typedef {import("./Hbar.js").default} Hbar
+ * @typedef {import("./U2U.js").default} U2U
  */
 
 /**
@@ -139,7 +139,7 @@ export function isStringOrUint8Array(variable) {
 /**
  * Takes any param and returns false if null or undefined.
  *
- * @template {Long | Hbar} T
+ * @template {Long | U2U} T
  * @param {T} variable
  * @returns {T}
  */
@@ -337,7 +337,7 @@ export function convertToNumber(variable) {
 /**
  * Creates a DataView on top of an Uint8Array that could be or not be pooled, ensuring that we don't get out of bounds.
  *
- * @param {Uint8Array} arr
+ * @param {Uint8Array | Int8Array} arr
  * @param {number | undefined} offset
  * @param {number | undefined} length
  * @returns {DataView}

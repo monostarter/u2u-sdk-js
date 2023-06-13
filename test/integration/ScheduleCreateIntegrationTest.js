@@ -1,6 +1,6 @@
 import {
     AccountCreateTransaction,
-    Hbar,
+    U2U,
     KeyList,
     PrivateKey,
     ScheduleInfoQuery,
@@ -8,6 +8,8 @@ import {
     TopicCreateTransaction,
     TopicMessageSubmitTransaction,
     AccountBalanceQuery,
+    ScheduleCreateTransaction,
+    TransferTransaction,
 } from "../../src/exports.js";
 import IntegrationTestEnv from "./client/NodeIntegrationTestEnv.js";
 
@@ -37,7 +39,7 @@ describe("ScheduleCreate", function () {
         );
 
         const response = await new AccountCreateTransaction()
-            .setInitialBalance(new Hbar(50))
+            .setInitialBalance(new U2U(50))
             .setKey(keyList)
             .execute(env.client);
 
@@ -128,7 +130,7 @@ describe("ScheduleCreate", function () {
         console.log(`Balances of the new account: ${balance.toString()}`);
 
         const response = await new AccountCreateTransaction()
-            .setInitialBalance(new Hbar(10))
+            .setInitialBalance(new U2U(10))
             .setKey(keyList)
             .execute(env.client);
 
@@ -165,6 +167,27 @@ describe("ScheduleCreate", function () {
             .getCost(env.client);
 
         expect(cost.toTinybars().toInt()).to.be.at.least(1);
+    });
+
+    it("should be able to encode/decode scheduled transaction", async function () {
+        this.timeout(120000);
+
+        const tx = new TransferTransaction()
+            .addHbarTransfer(env.operatorId, U2U.fromTinyU2U(1))
+            .addHbarTransfer("0.0.1023", U2U.fromTinyU2U(1).negated());
+
+        const scheduledTx = new ScheduleCreateTransaction()
+            .setScheduledTransaction(tx)
+            .freezeWith(env.client);
+
+        const sch = scheduledTx._getScheduledTransactionBody();
+        expect(sch.scheduleCreate.scheduledTransactionBody).not.to.be.null;
+
+        const bytes = scheduledTx.toBytes();
+        const tx2 = ScheduleCreateTransaction.fromBytes(bytes);
+
+        const sch2 = tx2._getScheduledTransactionBody();
+        expect(sch2.scheduleCreate.scheduledTransactionBody).not.to.be.null;
     });
 
     after(async function () {

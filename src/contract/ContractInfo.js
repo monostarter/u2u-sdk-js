@@ -23,9 +23,9 @@ import AccountId from "../account/AccountId.js";
 import StakingInfo from "../StakingInfo.js";
 import Timestamp from "../Timestamp.js";
 import Duration from "../Duration.js";
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import Long from "long";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 import TokenRelationshipMap from "../account/TokenRelationshipMap.js";
 import Key from "../Key.js";
 import LedgerId from "../LedgerId.js";
@@ -52,7 +52,7 @@ export default class ContractInfo {
      * @param {?AccountId} props.autoRenewAccountId
      * @param {Long} props.storage
      * @param {string} props.contractMemo
-     * @param {Hbar} props.balance
+     * @param {U2U} props.balance
      * @param {boolean} props.isDeleted
      * @param {TokenRelationshipMap} props.tokenRelationships
      * @param {LedgerId|null} props.ledgerId
@@ -211,7 +211,7 @@ export default class ContractInfo {
                         : Long.fromValue(info.storage)
                     : Long.ZERO,
             contractMemo: info.memo != null ? info.memo : "",
-            balance: Hbar.fromTinybars(info.balance != null ? info.balance : 0),
+            balance: U2U.fromTinyU2U(info.balance != null ? info.balance : 0),
             isDeleted: /** @type {boolean} */ (info.deleted),
             tokenRelationships: TokenRelationshipMap._fromProtobuf(
                 info.tokenRelationships != null ? info.tokenRelationships : []
