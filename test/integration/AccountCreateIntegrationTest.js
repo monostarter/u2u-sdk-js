@@ -3,7 +3,7 @@ import {
     AccountDeleteTransaction,
     TransferTransaction,
     AccountInfoQuery,
-    Hbar,
+    U2U,
     PrivateKey,
     Status,
     TransactionId,
@@ -26,7 +26,7 @@ describe("AccountCreate", function () {
 
         const response = await new AccountCreateTransaction()
             .setKey(key.publicKey)
-            .setInitialBalance(new Hbar(2))
+            .setInitialBalance(new U2U(2))
             .execute(env.client);
 
         const receipt = await response.getReceipt(env.client);
@@ -42,7 +42,7 @@ describe("AccountCreate", function () {
         expect(info.isDeleted).to.be.false;
         expect(info.key.toString()).to.be.equal(key.publicKey.toString());
         expect(info.balance.toTinybars().toNumber()).to.be.equal(
-            new Hbar(2).toTinybars().toNumber()
+            new U2U(2).toTinybars().toNumber()
         );
         expect(info.autoRenewPeriod.seconds.toNumber()).to.be.equal(7776000);
         expect(info.proxyAccountId).to.be.null;
@@ -67,7 +67,7 @@ describe("AccountCreate", function () {
 
         const response = await new AccountCreateTransaction()
             .setKey(key.publicKey)
-            .setInitialBalance(new Hbar(2))
+            .setInitialBalance(new U2U(2))
             .execute(env.client);
 
         const receipt = await response.getReceipt(env.client);
@@ -84,7 +84,7 @@ describe("AccountCreate", function () {
         expect(info.isDeleted).to.be.false;
         expect(info.key.toString()).to.be.equal(key.publicKey.toString());
         expect(info.balance.toTinybars().toNumber()).to.be.equal(
-            new Hbar(2).toTinybars().toNumber()
+            new U2U(2).toTinybars().toNumber()
         );
         expect(info.autoRenewPeriod.seconds.toNumber()).to.be.equal(7776000);
         expect(info.proxyAccountId).to.be.null;
@@ -93,8 +93,8 @@ describe("AccountCreate", function () {
         const transaction = new TransferTransaction()
             .setNodeAccountIds([response.nodeId])
             .setTransactionId(TransactionId.generate(account))
-            .addHbarTransfer(account, Hbar.fromTinybars(10).negated())
-            .addHbarTransfer(env.operatorId, Hbar.fromTinybars(10))
+            .addHbarTransfer(account, U2U.fromTinyU2U(10).negated())
+            .addHbarTransfer(env.operatorId, U2U.fromTinyU2U(10))
             .freezeWith(env.client);
 
         await transaction.sign(key);
@@ -146,7 +146,7 @@ describe("AccountCreate", function () {
 
         try {
             const response = await new AccountCreateTransaction()
-                .setInitialBalance(new Hbar(2))
+                .setInitialBalance(new U2U(2))
                 .execute(env.client);
 
             await response.getReceipt(env.client);
@@ -208,7 +208,7 @@ describe("AccountCreate", function () {
 
         let transaction = new AccountCreateTransaction()
             .setKey(thresholdKey)
-            .setInitialBalance(Hbar.fromTinybars(1))
+            .setInitialBalance(U2U.fromTinyU2U(1))
             .freezeWith(env.client);
 
         const txAccountCreate = await transaction.execute(env.client);

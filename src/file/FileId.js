@@ -19,7 +19,7 @@
  */
 
 import * as entity_id from "../EntityIdHelper.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 import Long from "long";
 
 /**
@@ -193,6 +193,6 @@ FileId.ADDRESS_BOOK = new FileId(102);
 FileId.FEE_SCHEDULE = new FileId(111);
 
 /**
- * The current exchange rate of HBAR to USD.
+ * The current exchange rate of U2U to USD.
  */
 FileId.EXCHANGE_RATES = new FileId(112);

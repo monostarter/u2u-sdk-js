@@ -20,10 +20,10 @@
 
 import Status from "../Status.js";
 import AccountId from "../account/AccountId.js";
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import Executable, { ExecutionState } from "../Executable.js";
 import TransactionId from "../transaction/TransactionId.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 import PrecheckStatusError from "../PrecheckStatusError.js";
 import MaxQueryPaymentExceeded from "../MaxQueryPaymentExceeded.js";
 import Long from "long";
@@ -75,7 +75,7 @@ export default class Query extends Executable {
          * The amount being paid to the node for this query.
          * A user can set this field explicitly, or we'll query the value during execution.
          *
-         * @type {?Hbar}
+         * @type {?U2U}
          */
         this._queryPayment = null;
 
@@ -85,7 +85,7 @@ export default class Query extends Executable {
          * we query the actual cost of the query and the cost is greater than the max query payment
          * we'll throw a `MaxQueryPaymentExceeded` error.
          *
-         * @type {?Hbar}
+         * @type {?U2U}
          */
         this._maxQueryPayment = null;
 
@@ -144,7 +144,7 @@ export default class Query extends Executable {
      * The client will submit exactly this amount for the payment of this query. Hedera
      * will not return any remainder.
      *
-     * @param {Hbar} queryPayment
+     * @param {U2U} queryPayment
      * @returns {this}
      */
     setQueryPayment(queryPayment) {
@@ -156,7 +156,7 @@ export default class Query extends Executable {
     /**
      * Set the maximum payment allowable for this query.
      *
-     * @param {Hbar} maxQueryPayment
+     * @param {U2U} maxQueryPayment
      * @returns {this}
      */
     setMaxQueryPayment(maxQueryPayment) {
@@ -169,7 +169,7 @@ export default class Query extends Executable {
      * Fetch the cost of this query from a consensus node
      *
      * @param {import("../client/Client.js").default<Channel, *>} client
-     * @returns {Promise<Hbar>}
+     * @returns {Promise<U2U>}
      */
     async getCost(client) {
         // The node account IDs must be set to execute a cost query
@@ -186,7 +186,7 @@ export default class Query extends Executable {
         // Change the timestamp. Should we be doing this?
         this._timestamp = Date.now();
         const cost = await COST_QUERY[0](this).execute(client);
-        return Hbar.fromTinybars(
+        return U2U.fromTinyU2U(
             cost._valueInTinybar.multipliedBy(1.1).toFixed(0)
         );
     }
@@ -304,7 +304,7 @@ export default class Query extends Executable {
             }
         }
 
-        let cost = new Hbar(0);
+        let cost = new U2U(0);
 
         const maxQueryPayment =
             this._maxQueryPayment != null
@@ -352,7 +352,7 @@ export default class Query extends Executable {
                 /** @type {import("../transaction/TransactionId.js").default} */ (
                     this._paymentTransactionId
                 );
-            const paymentAmount = /** @type {Hbar} */ (this._queryPayment);
+            const paymentAmount = /** @type {U2U} */ (this._queryPayment);
 
             this._logger?.debug(
                 `[${logId}] making a payment transaction for node ${nodeId.toString()} and transaction ID ${paymentTransactionId.toString()} with amount ${paymentAmount.toString()}`
@@ -449,7 +449,7 @@ export default class Query extends Executable {
                     /** @type {import("../transaction/TransactionId.js").default} */ (
                         this._paymentTransactionId
                     );
-                const paymentAmount = /** @type {Hbar} */ (this._queryPayment);
+                const paymentAmount = /** @type {U2U} */ (this._queryPayment);
 
                 this._logger?.debug(
                     `[${logId}] making a payment transaction for node ${nodeId.toString()} and transaction ID ${paymentTransactionId.toString()} with amount ${paymentAmount.toString()}`
@@ -549,7 +549,7 @@ export default class Query extends Executable {
  * @param {TransactionId} paymentTransactionId
  * @param {AccountId} nodeId
  * @param {?ClientOperator} operator
- * @param {Hbar} paymentAmount
+ * @param {U2U} paymentAmount
  * @returns {Promise<HashgraphProto.proto.ITransaction>}
  */
 export async function _makePaymentTransaction(
@@ -591,7 +591,7 @@ export async function _makePaymentTransaction(
     const body = {
         transactionID: paymentTransactionId._toProtobuf(),
         nodeAccountID: nodeId._toProtobuf(),
-        transactionFee: new Hbar(1).toTinybars(),
+        transactionFee: new U2U(1).toTinybars(),
         transactionValidDuration: {
             seconds: Long.fromNumber(120),
         },

@@ -22,12 +22,12 @@ import TokenId from "./TokenId.js";
 import CustomFee from "./CustomFee.js";
 import AccountId from "../account/AccountId.js";
 import Long from "long";
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ICustomFee} HashgraphProto.proto.ICustomFee
- * @typedef {import("@hashgraph/proto").proto.IFixedFee} HashgraphProto.proto.IFixedFee
+ * @typedef {import("@u2u/proto").proto.ICustomFee} HashgraphProto.proto.ICustomFee
+ * @typedef {import("@u2u/proto").proto.IFixedFee} HashgraphProto.proto.IFixedFee
  */
 
 export default class CustomFixedFee extends CustomFee {
@@ -61,7 +61,7 @@ export default class CustomFixedFee extends CustomFee {
     }
 
     /**
-     * @param {Hbar} amount
+     * @param {U2U} amount
      * @returns {CustomFixedFee}
      */
     setHbarAmount(amount) {
@@ -71,12 +71,12 @@ export default class CustomFixedFee extends CustomFee {
     }
 
     /**
-     * @returns {TokenId | Hbar | null}
+     * @returns {TokenId | U2U | null}
      */
     get hbarAmount() {
         return this._denominatingTokenId != null
             ? null
-            : Hbar.fromTinybars(this._amount != null ? this._amount : 0);
+            : U2U.fromTinyU2U(this._amount != null ? this._amount : 0);
     }
 
     /**

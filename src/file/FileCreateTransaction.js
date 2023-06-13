@@ -18,7 +18,7 @@
  * ‍
  */
 
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import Transaction, {
     TRANSACTION_REGISTRY,
     DEFAULT_AUTO_RENEW_PERIOD,
@@ -31,12 +31,12 @@ import Long from "long";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.IFileCreateTransactionBody} HashgraphProto.proto.IFileCreateTransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.IFileCreateTransactionBody} HashgraphProto.proto.IFileCreateTransactionBody
  */
 
 /**
@@ -87,7 +87,7 @@ export default class FileCreateTransaction extends Transaction {
          */
         this._fileMemo = null;
 
-        this._defaultMaxTransactionFee = new Hbar(5);
+        this._defaultMaxTransactionFee = new U2U(5);
 
         if (props.keys != null) {
             this.setKeys(props.keys);

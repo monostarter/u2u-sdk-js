@@ -3,7 +3,7 @@ import {
     LocalProvider,
     PrivateKey,
     PublicKey,
-    Hbar,
+    U2U,
     AccountId,
     AccountBalanceQuery,
     AccountInfoQuery,
@@ -42,11 +42,11 @@ async function main() {
      * as a hex-encoded ASN1 DER representation of the key.
      *
      * An AccountId with an aliasKey can be used just like a normal AccountId for the purposes of queries and
-     * transactions, however most queries and transactions involving such an AccountId won't work until Hbar has
+     * transactions, however most queries and transactions involving such an AccountId won't work until U2U has
      * been transferred to the aliasKey account.
      *
      * There is no record in the Hedera network of an account associated with a given aliasKey
-     * until an amount of Hbar is transferred to the account.  The moment that Hbar is transferred to that aliasKey
+     * until an amount of U2U is transferred to the account.  The moment that U2U is transferred to that aliasKey
      * AccountId is the moment that that account actually begins to exist in the Hedera ledger.
      */
 
@@ -83,10 +83,10 @@ async function main() {
         "302a300506032b6570032100114e6abc371b82dab5c15ea149f02d34a012087b163516dd70f44acafabf7777"
     ).toAccountId(0, 0);
 
-    console.log("Transferring some Hbar to the new account");
+    console.log("Transferring some U2U to the new account");
     let transaction = await new TransferTransaction()
-        .addHbarTransfer(wallet.getAccountId(), new Hbar(10).negated())
-        .addHbarTransfer(aliasAccountId, new Hbar(10))
+        .addHbarTransfer(wallet.getAccountId(), new U2U(10).negated())
+        .addHbarTransfer(aliasAccountId, new U2U(10))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
 

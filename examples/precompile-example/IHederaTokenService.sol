@@ -226,7 +226,7 @@ interface IHederaTokenService {
         // Specifies ID of token that should be used for fixed fee denomination
         address tokenId;
 
-        // Specifies this fixed fee should be denominated in Hbar
+        // Specifies this fixed fee should be denominated in U2U
         bool useHbarsForPayment;
 
         // Specifies this fixed fee should be denominated in the Token currently being created
@@ -273,7 +273,7 @@ interface IHederaTokenService {
         // is exchanged with the sender. Consists of:
         // amount: the amount to charge for the fee
         // tokenId: Specifies ID of token that should be used for fixed fee denomination
-        // useHbarsForPayment: Specifies this fee should be denominated in Hbar
+        // useHbarsForPayment: Specifies this fee should be denominated in U2U
         uint32 amount;
         address tokenId;
         bool useHbarsForPayment;

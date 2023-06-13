@@ -559,17 +559,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Support for using any node from the entire network upon execution
     if node account IDs have no been locked for the request.
 -   Support for all integer widths for `ContractFunction[Result|Selector|Params]`
--   `AccountAllowanceApproveTransaction.approve[Hbar|Token|TokenNft]Allowance()`
--   `AccountAllowanceAdjustTransaction.[grant|revoke][Hbar|Token|TokenNft]Allowance()`
+-   `AccountAllowanceApproveTransaction.approve[U2U|Token|TokenNft]Allowance()`
+-   `AccountAllowanceAdjustTransaction.[grant|revoke][U2U|Token|TokenNft]Allowance()`
 -   `AccountAllowanceAdjustTransaction.[grant|revoke]TokenNftAllowanceAllSerials()`
 -   `TransactionRecord.[hbar|token|tokenNft]AllowanceAdjustments`
--   `TransferTransaction.addApproved[Hbar|Token|Nft]Transfer()`
+-   `TransferTransaction.addApproved[U2U|Token|Nft]Transfer()`
 
 ### Deprecated
 
--   `AccountAllowanceApproveTransaction.add[Hbar|Token|TokenNft]Allowance[WithOwner]()`, use `approve*Allowance()` instead.
--   `AccountAllowanceAdjustTransaction.add[Hbar|Token|TokenNft]Allowance[WithOwner]()`, use `[grant|revoke]*Allowance()` instead.
--   `TransferTransaction.set[Hbar|Token|Nft]TransferApproval()`, use `addApproved*Transfer()` instead.
+-   `AccountAllowanceApproveTransaction.add[U2U|Token|TokenNft]Allowance[WithOwner]()`, use `approve*Allowance()` instead.
+-   `AccountAllowanceAdjustTransaction.add[U2U|Token|TokenNft]Allowance[WithOwner]()`, use `[grant|revoke]*Allowance()` instead.
+-   `TransferTransaction.set[U2U|Token|Nft]TransferApproval()`, use `addApproved*Transfer()` instead.
 
 ### Changed
 
@@ -597,14 +597,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `TransactionRecord.[hbar|token|tokenNft]AllowanceAdjustments`
--   `TransferTransaction.addApproved[Hbar|Token|Nft]Transfer()`
+-   `TransferTransaction.addApproved[U2U|Token|Nft]Transfer()`
 
 ## v2.11.1
 
 ### Added
 
--   `AccountAllowanceApproveTransaction.approve[Hbar|Token|TokenNft]Allowance()`
--   `AccountAllowanceAdjustTransaction.[grant|revoke][Hbar|Token|TokenNft]Allowance()`
+-   `AccountAllowanceApproveTransaction.approve[U2U|Token|TokenNft]Allowance()`
+-   `AccountAllowanceAdjustTransaction.[grant|revoke][U2U|Token|TokenNft]Allowance()`
 -   `AccountAllowanceAdjustTransaction.[grant|revoke]TokenNftAllowanceAllSerials()`
 
 ## v2.12.0-beta.1
@@ -616,19 +616,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Support for using any node from the entire network upon execution
     if node account IDs have no been locked for the request.
 -   Support for all integer widths for `ContractFunction[Result|Selector|Params]`
--   `AccountAllowanceApproveTransaction.approve[Hbar|Token|TokenNft]Allowance()`
--   `AccountAllowanceAdjustTransaction.[grant|revoke][Hbar|Token|TokenNft]Allowance()`
+-   `AccountAllowanceApproveTransaction.approve[U2U|Token|TokenNft]Allowance()`
+-   `AccountAllowanceAdjustTransaction.[grant|revoke][U2U|Token|TokenNft]Allowance()`
 -   `AccountAllowanceAdjustTransaction.[grant|revoke]TokenNftAllowanceAllSerials()`
 -   `TransactionRecord.[hbar|token|tokenNft]AllowanceAdjustments`
--   `TransferTransaction.addApproved[Hbar|Token|Nft]Transfer()`
+-   `TransferTransaction.addApproved[U2U|Token|Nft]Transfer()`
 -   Ledger ID checksums
 -   `Transaction.fromBytes()` should validate all the transaction bodies are the same
 
 ### Deprecated
 
--   `AccountAllowanceApproveTransaction.add[Hbar|Token|TokenNft]Allowance[WithOwner]()`, use `approve*Allowance()` instead.
--   `AccountAllowanceAdjustTransaction.add[Hbar|Token|TokenNft]Allowance[WithOwner]()`, use `[grant|revoke]*Allowance()` instead.
--   `TransferTransaction.set[Hbar|Token|Nft]TransferApproval()`, use `addApproved*Transfer()` instead.
+-   `AccountAllowanceApproveTransaction.add[U2U|Token|TokenNft]Allowance[WithOwner]()`, use `approve*Allowance()` instead.
+-   `AccountAllowanceAdjustTransaction.add[U2U|Token|TokenNft]Allowance[WithOwner]()`, use `[grant|revoke]*Allowance()` instead.
+-   `TransferTransaction.set[U2U|Token|Nft]TransferApproval()`, use `addApproved*Transfer()` instead.
 
 ### Changed
 
@@ -772,9 +772,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `TransactionRecord.tokenTransfersList`
 -   `AccountAllowance[Adjust|Approve]Transaction`
 -   `AccountInfo.[hbar|token|tokenNft]Allowances`
--   `[Hbar|Token|TokenNft]Allowance`
--   `[Hbar|Token|TokenNft]Allowance`
--   `TransferTransaction.set[Hbar|Token|TokenNft]TransferApproval()`
+-   `[U2U|Token|TokenNft]Allowance`
+-   `[U2U|Token|TokenNft]Allowance`
+-   `TransferTransaction.set[U2U|Token|TokenNft]TransferApproval()`
 
 ## v2.8.0
 
@@ -1050,7 +1050,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Client.[set|get]NodeWaitTime()` - minimum delay for nodes that are nto responding
 -   `Client.[set|get]MaxAttempts()` - max number of attempts for each request
 -   `Client.[set|get]MaxNodesPerTransaction()` - number of node account IDs to use per request
--   `CustomFixedFee.[set|get]HbarAmount()` - helper method to set both `denominatingTokenId` and `amount` when fee is an `Hbar` amount
+-   `CustomFixedFee.[set|get]HbarAmount()` - helper method to set both `denominatingTokenId` and `amount` when fee is an `U2U` amount
 -   `CustomFixedFee.setDenominatingTokenToSameToken()` - helper method to set `denominatingTokenId` to `0.0.0` which is not obvious
 
 ### Changed
@@ -1070,7 +1070,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Updated `Status` with new response codes
--   Support for `Hbar.[from|to]String()` to be reversible
+-   Support for `U2U.[from|to]String()` to be reversible
 -   `Client.setAutoValidateChecksums()` set whether checksums on ids will be automatically validated upon attempting to execute a transaction or query. Disabled by default. Check status with `Client.isAutoValidateChecksumsEnabled()`
 -   `*Id.toString()` no longer stringifies with checksums. Use `*Id.getChecksum()` to get the checksum that was parsed, or use `*Id.toStringWithChecksum(client)` to stringify with the correct checksum for that ID on the client's network.
 -   `*Id.validateChecksum()` to validate a checksum. Throws new `BadEntityIdException`
@@ -1131,8 +1131,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   `Hbar.fromTinybar()` supports `BigNumber`
--   `Hbar.toString()` supports `HbarUnit`
+-   `U2U.fromTinybar()` supports `BigNumber`
+-   `U2U.toString()` supports `HbarUnit`
 -   Implemented to and from bytes for `TopicInfo` and `TokenInfo`
 -   Support for `sign-on-demand`
     -   This is disabled by default to you'll need to enable it using `Client.setSignOnDemand(true)`
@@ -1178,8 +1178,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Exposed `AccountBalance.tokenDecimals`
--   Support for `string` parameters in `Hbar.fromTinybars()`
--   `Hbar.toBigNumber()` which is a simple wrapper around `Hbar.to(HbarUnit.Hbar)`
+-   Support for `string` parameters in `U2U.fromTinyU2U()`
+-   `U2U.toBigNumber()` which is a simple wrapper around `U2U.to(HbarUnit.U2U)`
 -   `AccountBalance.toJSON()`
 -   Support for `maxBackoff`, `maxAttempts`, `retryHandler`, and `completionHandler` in `TopicMessageQuery`
 -   Default logging behavior to `TopicMessageQuery` if an error handler or completion handler was not set
@@ -1198,8 +1198,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `PrivateKey.legacyDerive()` - Derive private key using legacy derivations
--   `Hbar.fromTinybars()` supports `string` parameter
--   `Hbar.toBigNumber()` aliases `Hbar.to(HbarUnit.Hbar)`
+-   `U2U.fromTinyU2U()` supports `string` parameter
+-   `U2U.toBigNumber()` aliases `U2U.to(HbarUnit.U2U)`
 -   `AccountBalance.tokenDecimals` - Represents the decimals on a token
 -   `AccountBalance.toString()` should print a `JSON.stringified()` output
 -   `AccountBalance.toJSON()`
@@ -1395,7 +1395,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fixes `AddBytes32Array`
 
--   Fixes `Hbar.isNegative()` failing with `undefined`.
+-   Fixes `U2U.isNegative()` failing with `undefined`.
 
 -   Fixes `CryptoTransferTransaction.addTransfer()` not supporting `BigNumber` or
     `number` as arguments.
@@ -1504,7 +1504,7 @@ will be continuously supported.
 
 -   Deprecated `SystemUndelete#setId`; replaced with `SystemUndelete#setFileId` or `SystemUndelete#setContractId`
 
--   Deprecated `Hbar.of(val)`; replaced with `new Hbar(val)`
+-   Deprecated `U2U.of(val)`; replaced with `new U2U(val)`
 
 -   Deprecated `FreezeTransaction#setStartTime(Date)`; replaced with `FreezeTransaction#setStartTime(hour: number, minute: number)`
 
@@ -1606,7 +1606,7 @@ No significant changes since v1.0.0-beta.5
 
 -   `ContractRecordsQuery.execute` now directly returns `TransactionRecord[]`
 
--   `AccountAmount.amount` (`String`) -> `AccountAmount.amount` (`Hbar`)
+-   `AccountAmount.amount` (`String`) -> `AccountAmount.amount` (`U2U`)
 
 -   TransactionReceipt
     -   `receiverSigRequired` -> `isReceiverSignatureRequired`
@@ -1668,7 +1668,7 @@ No significant changes since v1.0.0-beta.5
 
 -   `Transaction.toString`. This will dump the transaction (incl. the body) to a stringified JSON object representation of the transaction. Useful for debugging.
 
--   A default of 1 Hbar is now set for both maximum transaction fees and maximum query payments.
+-   A default of 1 U2U is now set for both maximum transaction fees and maximum query payments.
 
 -   Smart Contract type encoding and decoding to match Java.
 

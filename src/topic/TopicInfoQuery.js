@@ -22,21 +22,21 @@ import Query, { QUERY_REGISTRY } from "../query/Query.js";
 import TopicId from "./TopicId.js";
 import TopicInfo from "./TopicInfo.js";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.IQuery} HashgraphProto.proto.IQuery
- * @typedef {import("@hashgraph/proto").proto.IQueryHeader} HashgraphProto.proto.IQueryHeader
- * @typedef {import("@hashgraph/proto").proto.IResponse} HashgraphProto.proto.IResponse
- * @typedef {import("@hashgraph/proto").proto.IResponseHeader} HashgraphProto.proto.IResponseHeader
- * @typedef {import("@hashgraph/proto").proto.IConsensusGetTopicInfoResponse} HashgraphProto.proto.IConsensusGetTopicInfoResponse
- * @typedef {import("@hashgraph/proto").proto.IConsensusGetTopicInfoQuery} HashgraphProto.proto.IConsensusGetTopicInfoQuery
+ * @typedef {import("@u2u/proto").proto.IQuery} HashgraphProto.proto.IQuery
+ * @typedef {import("@u2u/proto").proto.IQueryHeader} HashgraphProto.proto.IQueryHeader
+ * @typedef {import("@u2u/proto").proto.IResponse} HashgraphProto.proto.IResponse
+ * @typedef {import("@u2u/proto").proto.IResponseHeader} HashgraphProto.proto.IResponseHeader
+ * @typedef {import("@u2u/proto").proto.IConsensusGetTopicInfoResponse} HashgraphProto.proto.IConsensusGetTopicInfoResponse
+ * @typedef {import("@u2u/proto").proto.IConsensusGetTopicInfoQuery} HashgraphProto.proto.IConsensusGetTopicInfoQuery
  */
 
 /**
  * @namespace com
- * @typedef {import("@hashgraph/proto").com.hedera.mirror.api.proto.IConsensusTopicResponse} com.hedera.mirror.api.proto.IConsensusTopicResponse
+ * @typedef {import("@u2u/proto").com.hedera.mirror.api.proto.IConsensusTopicResponse} com.hedera.mirror.api.proto.IConsensusTopicResponse
  */
 
 /**
@@ -113,7 +113,7 @@ export default class TopicInfoQuery extends Query {
     /**
      * @override
      * @param {import("../client/Client.js").default<Channel, *>} client
-     * @returns {Promise<Hbar>}
+     * @returns {Promise<U2U>}
      */
     async getCost(client) {
         return super.getCost(client);

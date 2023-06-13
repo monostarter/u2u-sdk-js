@@ -5,7 +5,7 @@ import Long from "long";
 import {
     AccountAllowanceApproveTransaction,
     AccountId,
-    Hbar,
+    U2U,
     NftId,
     Timestamp,
     TokenId,
@@ -25,7 +25,7 @@ describe("AccountAllowanceApproveTransaction", function () {
         const spenderAccountId2 = new AccountId(7890);
         const nodeAccountId = new AccountId(10, 11, 12);
         const timestamp1 = new Timestamp(14, 15);
-        const hbarAmount = Hbar.fromTinybars(100);
+        const hbarAmount = U2U.fromTinyU2U(100);
         const tokenAmount = Long.fromNumber(101);
         const ownerAccountId = new AccountId(20);
 

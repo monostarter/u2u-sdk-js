@@ -3,7 +3,7 @@ import {
     Client,
     LocalProvider,
     PrivateKey,
-    Hbar,
+    U2U,
     HbarUnit,
     AccountId,
     TransferTransaction,
@@ -63,8 +63,8 @@ async function main() {
     const aliasAccountId = publicKey.toAccountId(0, 0);
 
     let transferTransaction = await new TransferTransaction()
-        .addHbarTransfer(wallet.accountId, Hbar.from(-10, HbarUnit.Hbar))
-        .addHbarTransfer(aliasAccountId, Hbar.from(10, HbarUnit.Hbar))
+        .addHbarTransfer(wallet.accountId, U2U.from(-10, HbarUnit.U2U))
+        .addHbarTransfer(aliasAccountId, U2U.from(10, HbarUnit.U2U))
         .setTransactionMemo("")
         .freezeWithSigner(wallet);
 

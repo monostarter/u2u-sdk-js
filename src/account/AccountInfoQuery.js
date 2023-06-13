@@ -22,17 +22,17 @@ import Query, { QUERY_REGISTRY } from "../query/Query.js";
 import AccountId from "./AccountId.js";
 import AccountInfo from "./AccountInfo.js";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.IQuery} HashgraphProto.proto.IQuery
- * @typedef {import("@hashgraph/proto").proto.IQueryHeader} HashgraphProto.proto.IQueryHeader
- * @typedef {import("@hashgraph/proto").proto.IResponse} HashgraphProto.proto.IResponse
- * @typedef {import("@hashgraph/proto").proto.IResponseHeader} HashgraphProto.proto.IResponseHeader
- * @typedef {import("@hashgraph/proto").proto.CryptoGetInfoResponse.IAccountInfo} HashgraphProto.proto.CryptoGetInfoResponse.IAccountInfo
- * @typedef {import("@hashgraph/proto").proto.ICryptoGetInfoQuery} HashgraphProto.proto.ICryptoGetInfoQuery
- * @typedef {import("@hashgraph/proto").proto.ICryptoGetInfoResponse} HashgraphProto.proto.ICryptoGetInfoResponse
+ * @typedef {import("@u2u/proto").proto.IQuery} HashgraphProto.proto.IQuery
+ * @typedef {import("@u2u/proto").proto.IQueryHeader} HashgraphProto.proto.IQueryHeader
+ * @typedef {import("@u2u/proto").proto.IResponse} HashgraphProto.proto.IResponse
+ * @typedef {import("@u2u/proto").proto.IResponseHeader} HashgraphProto.proto.IResponseHeader
+ * @typedef {import("@u2u/proto").proto.CryptoGetInfoResponse.IAccountInfo} HashgraphProto.proto.CryptoGetInfoResponse.IAccountInfo
+ * @typedef {import("@u2u/proto").proto.ICryptoGetInfoQuery} HashgraphProto.proto.ICryptoGetInfoQuery
+ * @typedef {import("@u2u/proto").proto.ICryptoGetInfoResponse} HashgraphProto.proto.ICryptoGetInfoResponse
  */
 
 /**
@@ -124,7 +124,7 @@ export default class AccountInfoQuery extends Query {
     /**
      * @override
      * @param {import("../client/Client.js").default<Channel, *>} client
-     * @returns {Promise<Hbar>}
+     * @returns {Promise<U2U>}
      */
     async getCost(client) {
         return super.getCost(client);

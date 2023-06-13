@@ -2,7 +2,7 @@ import {
     AccountId,
     PrivateKey,
     Client,
-    Hbar,
+    U2U,
     AccountInfoQuery,
     TransactionReceiptQuery,
     AccountCreateTransaction,
@@ -74,7 +74,7 @@ async function main() {
      */
     const accountCreateTx = new AccountCreateTransaction()
         .setReceiverSignatureRequired(true)
-        .setInitialBalance(Hbar.fromTinybars(100))
+        .setInitialBalance(U2U.fromTinyU2U(100))
         .setKey(adminKey)
         .setAlias(evmAddress)
         .freezeWith(client);

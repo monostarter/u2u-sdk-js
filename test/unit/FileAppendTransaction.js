@@ -4,7 +4,7 @@ import {
     FileAppendTransaction,
     AccountId,
     Timestamp,
-    Hbar,
+    U2U,
     TransactionId,
     FileId,
 } from "../../src/index.js";
@@ -16,7 +16,7 @@ describe("FileAppendTransaction", function () {
         const fileId = new FileId(8);
         const nodeAccountId = new AccountId(10, 11, 12);
         const timestamp1 = new Timestamp(14, 15);
-        const fee = new Hbar(5);
+        const fee = new U2U(5);
 
         let transaction = new FileAppendTransaction()
             .setTransactionId(

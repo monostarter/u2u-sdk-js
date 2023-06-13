@@ -10,14 +10,14 @@ import {
     FileId,
     Transaction,
     TransactionId,
-    Hbar,
+    U2U,
 } from "../../src/index.js";
 
 describe("EthereumTransaction", function () {
     it("toProtobuf with FileId", function () {
         const ethereumData = hex.decode("00112233445566778899");
         const callData = new FileId(1);
-        const maxGasAllowance = Hbar.fromTinybars(Long.fromNumber(10));
+        const maxGasAllowance = U2U.fromTinyU2U(Long.fromNumber(10));
         const accountId1 = new AccountId(7);
         const nodeAccountId = new AccountId(10, 11, 12);
         const timestamp1 = new Timestamp(14, 15);
@@ -29,7 +29,7 @@ describe("EthereumTransaction", function () {
             .setNodeAccountIds([nodeAccountId])
             .setEthereumData(ethereumData)
             .setCallDataFileId(callData)
-            .setMaxGasAllowanceHbar(maxGasAllowance)
+            .setMaxGasAllowanceU2U(maxGasAllowance)
             .freeze();
 
         transaction = Transaction.fromBytes(transaction.toBytes());
@@ -45,7 +45,7 @@ describe("EthereumTransaction", function () {
 
     it("toProtobuf with Uint8Array", function () {
         const ethereumData = hex.decode("00112233445566778899");
-        const maxGasAllowance = Hbar.fromTinybars(Long.fromNumber(10));
+        const maxGasAllowance = U2U.fromTinyU2U(Long.fromNumber(10));
         const accountId1 = new AccountId(7);
         const nodeAccountId = new AccountId(10, 11, 12);
         const timestamp1 = new Timestamp(14, 15);
@@ -56,7 +56,7 @@ describe("EthereumTransaction", function () {
             )
             .setNodeAccountIds([nodeAccountId])
             .setEthereumData(ethereumData)
-            .setMaxGasAllowanceHbar(maxGasAllowance)
+            .setMaxGasAllowanceU2U(maxGasAllowance)
             .freeze();
 
         transaction = Transaction.fromBytes(transaction.toBytes());

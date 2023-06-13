@@ -2,7 +2,7 @@ import {
     FileCreateTransaction,
     ContractCreateTransaction,
     ContractCallQuery,
-    Hbar,
+    U2U,
     ContractFunctionParameters,
     FileAppendTransaction,
 } from "../../src/exports.js";
@@ -73,7 +73,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -94,7 +94,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -114,7 +114,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -136,7 +136,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -157,7 +157,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -178,7 +178,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -199,7 +199,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -220,7 +220,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -241,7 +241,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -262,7 +262,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -283,7 +283,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -304,7 +304,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -325,7 +325,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -346,7 +346,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);
@@ -367,7 +367,7 @@ describe("ContractFunctionParameters", function () {
             )
             //Set the query payment for the node returning the request
             //This value must cover the cost of the request otherwise will fail
-            .setQueryPayment(new Hbar(10));
+            .setQueryPayment(new U2U(10));
 
         //Submit to a Hedera network
         const txResponse = await contractQuery.execute(env.client);

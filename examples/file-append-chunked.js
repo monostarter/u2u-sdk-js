@@ -4,7 +4,7 @@ import {
     FileCreateTransaction,
     FileAppendTransaction,
     FileContentsQuery,
-    Hbar,
+    U2U,
 } from "@hashgraph/sdk";
 
 import dotenv from "dotenv";
@@ -75,7 +75,7 @@ async function main() {
     let transaction = await new FileCreateTransaction()
         .setKeys([wallet.getAccountKey()])
         .setContents("[e2e::FileCreateTransaction]")
-        .setMaxTransactionFee(new Hbar(5))
+        .setMaxTransactionFee(new U2U(5))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
     const resp = await transaction.executeWithSigner(wallet);
@@ -92,7 +92,7 @@ async function main() {
                     .setNodeAccountIds([resp.nodeId])
                     .setFileId(fileId)
                     .setContents(bigContents)
-                    .setMaxTransactionFee(new Hbar(5))
+                    .setMaxTransactionFee(new U2U(5))
                     .freezeWithSigner(wallet)
             ).signWithSigner(wallet)
         ).executeWithSigner(wallet)

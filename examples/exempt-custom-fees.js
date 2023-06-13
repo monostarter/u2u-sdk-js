@@ -5,7 +5,7 @@ import {
     TokenType,
     TransferTransaction,
     CustomFractionalFee,
-    Hbar,
+    U2U,
     AccountCreateTransaction,
     LocalProvider,
     Wallet,
@@ -58,7 +58,7 @@ async function main() {
 
     let createAccountAtx = await new AccountCreateTransaction()
         .setKey(firstAccountPublicKey)
-        .setInitialBalance(Hbar.fromString("1000"))
+        .setInitialBalance(U2U.fromString("1000"))
         .freezeWithSigner(wallet);
     createAccountAtx = await createAccountAtx.signWithSigner(wallet);
 
@@ -77,7 +77,7 @@ async function main() {
 
     let createAccountBtx = await new AccountCreateTransaction()
         .setKey(secondAccountPublicKey)
-        .setInitialBalance(Hbar.fromString("1000"))
+        .setInitialBalance(U2U.fromString("1000"))
         .freezeWithSigner(wallet);
     createAccountBtx = await createAccountBtx.signWithSigner(wallet);
 
@@ -96,7 +96,7 @@ async function main() {
 
     let createAccountCtx = await new AccountCreateTransaction()
         .setKey(thirdAccountPublicKey)
-        .setInitialBalance(Hbar.fromString("1000"))
+        .setInitialBalance(U2U.fromString("1000"))
         .freezeWithSigner(wallet);
     createAccountCtx = await createAccountCtx.signWithSigner(wallet);
 
@@ -149,7 +149,7 @@ async function main() {
         .setInitialSupply(100000000) // Total supply = 100000000 / 10 ^ 2
         .setDecimals(2)
         .setCustomFees([fee, fee2, fee3])
-        .setMaxTransactionFee(new Hbar(40))
+        .setMaxTransactionFee(new U2U(40))
         .freezeWithSigner(wallet);
 
     // TokenCreateTransaction should be also signed with all of the fee collector wallets

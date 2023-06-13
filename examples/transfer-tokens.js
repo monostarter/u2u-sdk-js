@@ -4,7 +4,7 @@ import {
     Wallet,
     LocalProvider,
     PrivateKey,
-    Hbar,
+    U2U,
     TokenAssociateTransaction,
     TokenCreateTransaction,
     TokenDeleteTransaction,
@@ -38,7 +38,7 @@ async function main() {
 
     let transaction = await new AccountCreateTransaction()
         .setKey(newKey.publicKey)
-        .setInitialBalance(new Hbar(2))
+        .setInitialBalance(new U2U(2))
         .freezeWithSigner(wallet);
     transaction = await transaction.signWithSigner(wallet);
     let resp = await transaction.executeWithSigner(wallet);
@@ -157,7 +157,7 @@ async function main() {
                         .setAccountId(newAccountId)
                         .setTransferAccountId(wallet.getAccountId())
                         .setTransactionId(TransactionId.generate(newAccountId))
-                        .setMaxTransactionFee(new Hbar(1))
+                        .setMaxTransactionFee(new U2U(1))
                         .freezeWithSigner(wallet)
                 ).sign(newKey)
             ).signWithSigner(wallet)

@@ -27,9 +27,9 @@ contract PrecompileExample is ExpiryHelper, PrngSystemContract {
     }
 
     // In order for some functions (such as createFungibleToken) to work, the contract must possess the funds for
-    // the function call.  We are using ContractExecuteTransaction.setPayableAmount() to transfer some Hbar
+    // the function call.  We are using ContractExecuteTransaction.setPayableAmount() to transfer some U2U
     // to the contract's account at each step (which means this function must be payable), and then transferring
-    // the excess Hbar back to the owner at the end of each step.
+    // the excess U2U back to the owner at the end of each step.
     function step1() external payable returns (int responseCode) {
         require(msg.sender == owner);
 
@@ -55,7 +55,7 @@ contract PrecompileExample is ExpiryHelper, PrngSystemContract {
             0 // decimals
         );
 
-        // send any excess Hbar back to the owner
+        // send any excess U2U back to the owner
         owner.transfer(address(this).balance);
     }
 
@@ -147,7 +147,7 @@ contract PrecompileExample is ExpiryHelper, PrngSystemContract {
         keys[0] = createSingleKey(ADMIN_KEY_TYPE | SUPPLY_KEY_TYPE, ED25519_KEY, keyBytes);
 
         IHederaTokenService.FixedFee[] memory fixedFees = new IHederaTokenService.FixedFee[](1);
-        // Create a fixed fee of 1 Hbar (100,000,000 tinybar) that is collected by owner
+        // Create a fixed fee of 1 U2U (100,000,000 tinybar) that is collected by owner
         fixedFees[0] = createFixedFeeForHbars(100000000, owner);
 
         (responseCode, nftToken) = createNonFungibleTokenWithCustomFees(
@@ -168,7 +168,7 @@ contract PrecompileExample is ExpiryHelper, PrngSystemContract {
             new IHederaTokenService.RoyaltyFee[](0)
         );
 
-        // send any excess Hbar back to the owner
+        // send any excess U2U back to the owner
         owner.transfer(address(this).balance);
     }
 

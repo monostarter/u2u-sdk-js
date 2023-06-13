@@ -2,7 +2,7 @@ import {
     AccountId,
     PrivateKey,
     Client,
-    Hbar,
+    U2U,
     AccountInfoQuery,
     TransactionReceiptQuery,
     AccountCreateTransaction,
@@ -68,7 +68,7 @@ async function main() {
      *   - Populate `setAlias(evmAddress)` field with the Ethereum public address
      */
     const accountCreateTx = new AccountCreateTransaction()
-        .setInitialBalance(Hbar.fromTinybars(100))
+        .setInitialBalance(U2U.fromTinyU2U(100))
         .setKey(operatorKey)
         .setAlias(evmAddress)
         .freezeWith(client);

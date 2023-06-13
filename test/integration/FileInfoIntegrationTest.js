@@ -2,7 +2,7 @@ import {
     FileCreateTransaction,
     FileDeleteTransaction,
     FileInfoQuery,
-    Hbar,
+    U2U,
 } from "../../src/exports.js";
 import IntegrationTestEnv from "./client/NodeIntegrationTestEnv.js";
 
@@ -32,7 +32,7 @@ describe("FileInfo", function () {
 
         const info = await new FileInfoQuery()
             .setFileId(file)
-            .setQueryPayment(new Hbar(22))
+            .setQueryPayment(new U2U(22))
             .execute(env.client);
 
         expect(info.fileId.toString()).to.be.equal(file.toString());
@@ -70,7 +70,7 @@ describe("FileInfo", function () {
 
         const info = await new FileInfoQuery()
             .setFileId(file)
-            .setQueryPayment(new Hbar(22))
+            .setQueryPayment(new U2U(22))
             .execute(env.client);
 
         expect(info.fileId.toString()).to.be.equal(file.toString());
@@ -104,7 +104,7 @@ describe("FileInfo", function () {
 
         const info = await new FileInfoQuery()
             .setFileId(file)
-            .setQueryPayment(new Hbar(22))
+            .setQueryPayment(new U2U(22))
             .execute(env.client);
 
         expect(info.fileId.toString()).to.be.equal(file.toString());

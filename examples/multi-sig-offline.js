@@ -2,7 +2,7 @@ import {
     Client,
     PrivateKey,
     AccountCreateTransaction,
-    Hbar,
+    U2U,
     AccountId,
     KeyList,
     TransferTransaction,
@@ -45,7 +45,7 @@ async function main() {
     const keyList = new KeyList([user1Key, user2Key]);
 
     const createAccountTransaction = new AccountCreateTransaction()
-        .setInitialBalance(new Hbar(2)) // 5 h
+        .setInitialBalance(new U2U(2)) // 5 h
         .setKey(keyList);
 
     const response = await createAccountTransaction.execute(client);

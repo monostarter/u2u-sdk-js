@@ -7,7 +7,7 @@ import {
     TokenType,
     CustomRoyaltyFee,
     CustomFixedFee,
-    Hbar,
+    U2U,
     TokenSupplyType,
     TokenMintTransaction,
     TokenBurnTransaction,
@@ -48,7 +48,7 @@ async function main() {
         .setNumerator(5)
         .setDenominator(10)
         .setFeeCollectorAccountId(treasuryId)
-        .setFallbackFee(new CustomFixedFee().setHbarAmount(new Hbar(200)));
+        .setFallbackFee(new CustomFixedFee().setHbarAmount(new U2U(200)));
 
     // IPFS CONTENT IDENTIFIERS FOR WHICH WE WILL CREATE NFTs
     const CID = [
@@ -224,7 +224,7 @@ async function main() {
      * BALANCE CHECKER FUNCTION
      *
      * @param {string | AccountId} id
-     * @returns {Promise<Hbar>}
+     * @returns {Promise<U2U>}
      */
     async function bCheckerFcn(id) {
         const balanceCheckTx = await new AccountBalanceQuery()

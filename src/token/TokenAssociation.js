@@ -20,11 +20,11 @@
 
 import AccountId from "../account/AccountId.js";
 import TokenId from "../token/TokenId.js";
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITokenAssociation} HashgraphProto.proto.ITokenAssociation
+ * @typedef {import("@u2u/proto").proto.ITokenAssociation} HashgraphProto.proto.ITokenAssociation
  */
 
 export default class TokenAssociation {
@@ -52,7 +52,7 @@ export default class TokenAssociation {
             this.setTokenId(props.tokenId);
         }
 
-        this._defaultMaxTransactionFee = new Hbar(5);
+        this._defaultMaxTransactionFee = new U2U(5);
     }
 
     /**

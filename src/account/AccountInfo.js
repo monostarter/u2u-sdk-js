@@ -21,18 +21,18 @@
 import AccountId from "./AccountId.js";
 import StakingInfo from "../StakingInfo.js";
 import LiveHash from "./LiveHash.js";
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import Timestamp from "../Timestamp.js";
 import Long from "long";
 import TokenRelationshipMap from "./TokenRelationshipMap.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 import Duration from "../Duration.js";
 import Key from "../Key.js";
 import PublicKey from "../PublicKey.js";
 import LedgerId from "../LedgerId.js";
 
 /**
- * @typedef {import("./HbarAllowance.js").default} HbarAllowance
+ * @typedef {import("./U2UAllowance.js").default} U2UAllowance
  * @typedef {import("./TokenAllowance.js").default} TokenAllowance
  * @typedef {import("./TokenNftAllowance.js").default} TokenNftAllowance
  * @typedef {import("../StakingInfo.js").StakingInfoJson} StakingInfoJson
@@ -72,11 +72,11 @@ export default class AccountInfo {
      * @param {?string} props.contractAccountId
      * @param {boolean} props.isDeleted
      * @param {?AccountId} props.proxyAccountId
-     * @param {Hbar} props.proxyReceived
+     * @param {U2U} props.proxyReceived
      * @param {Key} props.key
-     * @param {Hbar} props.balance
-     * @param {Hbar} props.sendRecordThreshold
-     * @param {Hbar} props.receiveRecordThreshold
+     * @param {U2U} props.balance
+     * @param {U2U} props.sendRecordThreshold
+     * @param {U2U} props.receiveRecordThreshold
      * @param {boolean} props.isReceiverSignatureRequired
      * @param {Timestamp} props.expirationTime
      * @param {Duration} props.autoRenewPeriod
@@ -87,7 +87,7 @@ export default class AccountInfo {
      * @param {Long} props.maxAutomaticTokenAssociations
      * @param {PublicKey | null} props.aliasKey
      * @param {LedgerId | null} props.ledgerId
-     * @param {HbarAllowance[]} props.hbarAllowances
+     * @param {U2UAllowance[]} props.hbarAllowances
      * @param {TokenAllowance[]} props.tokenAllowances
      * @param {TokenNftAllowance[]} props.nftAllowances
      * @param {?Long} props.ethereumNonce
@@ -265,13 +265,13 @@ export default class AccountInfo {
             key: Key._fromProtobufKey(
                 /** @type {HashgraphProto.proto.IKey} */ (info.key)
             ),
-            balance: Hbar.fromTinybars(info.balance != null ? info.balance : 0),
-            sendRecordThreshold: Hbar.fromTinybars(
+            balance: U2U.fromTinyU2U(info.balance != null ? info.balance : 0),
+            sendRecordThreshold: U2U.fromTinyU2U(
                 info.generateSendRecordThreshold != null
                     ? info.generateSendRecordThreshold
                     : 0
             ),
-            receiveRecordThreshold: Hbar.fromTinybars(
+            receiveRecordThreshold: U2U.fromTinyU2U(
                 info.generateReceiveRecordThreshold != null
                     ? info.generateReceiveRecordThreshold
                     : 0
@@ -306,7 +306,7 @@ export default class AccountInfo {
                 ).toInt() !== 0
                     ? AccountId._fromProtobuf(info.proxyAccountID)
                     : null,
-            proxyReceived: Hbar.fromTinybars(
+            proxyReceived: U2U.fromTinyU2U(
                 info.proxyReceived != null ? info.proxyReceived : 0
             ),
             liveHashes: (info.liveHashes != null ? info.liveHashes : []).map(

@@ -19,12 +19,12 @@
  */
 
 import AccountId from "./account/AccountId.js";
-import Hbar from "./Hbar.js";
+import U2U from "./U2U.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.IAccountAmount} HashgraphProto.proto.IAccountAmount
- * @typedef {import("@hashgraph/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
+ * @typedef {import("@u2u/proto").proto.IAccountAmount} HashgraphProto.proto.IAccountAmount
+ * @typedef {import("@u2u/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
  */
 
 /**
@@ -40,7 +40,7 @@ export default class Transfer {
      * @internal
      * @param {object} props
      * @param {AccountId | string} props.accountId
-     * @param {number | string | Long | BigNumber | Hbar} props.amount
+     * @param {number | string | Long | BigNumber | U2U} props.amount
      * @param {boolean} props.isApproved
      */
     constructor(props) {
@@ -58,9 +58,9 @@ export default class Transfer {
          * The amount of tinybars that the account sends(negative) or receives(positive).
          */
         this.amount =
-            props.amount instanceof Hbar
+            props.amount instanceof U2U
                 ? props.amount
-                : new Hbar(props.amount);
+                : new U2U(props.amount);
 
         this.isApproved = props.isApproved;
     }
@@ -81,7 +81,7 @@ export default class Transfer {
                             transfer.accountID
                         )
                     ),
-                    amount: Hbar.fromTinybars(
+                    amount: U2U.fromTinyU2U(
                         transfer.amount != null ? transfer.amount : 0
                     ),
                     isApproved: /** @type {boolean} */ (transfer.isApproval),

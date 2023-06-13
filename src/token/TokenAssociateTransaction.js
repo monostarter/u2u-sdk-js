@@ -18,7 +18,7 @@
  * ‍
  */
 
-import Hbar from "../Hbar.js";
+import U2U from "../U2U.js";
 import TokenId from "./TokenId.js";
 import AccountId from "../account/AccountId.js";
 import Transaction, {
@@ -27,13 +27,13 @@ import Transaction, {
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.ITokenAssociateTransactionBody} HashgraphProto.proto.ITokenAssociateTransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITokenID} HashgraphProto.proto.ITokenID
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.ITokenAssociateTransactionBody} HashgraphProto.proto.ITokenAssociateTransactionBody
+ * @typedef {import("@u2u/proto").proto.ITokenID} HashgraphProto.proto.ITokenID
  */
 
 /**
@@ -66,7 +66,7 @@ export default class TokenAssociateTransaction extends Transaction {
          */
         this._accountId = null;
 
-        this._defaultMaxTransactionFee = new Hbar(5);
+        this._defaultMaxTransactionFee = new U2U(5);
 
         if (props.tokenIds != null) {
             this.setTokenIds(props.tokenIds);

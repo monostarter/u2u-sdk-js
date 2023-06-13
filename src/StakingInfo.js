@@ -19,9 +19,9 @@
  */
 
 import AccountId from "./account/AccountId.js";
-import Hbar from "./Hbar.js";
+import U2U from "./U2U.js";
 import Timestamp from "./Timestamp.js";
-import * as HashgraphProto from "@hashgraph/proto";
+import * as HashgraphProto from "@u2u/proto";
 
 /**
  * @typedef {import("long").Long} Long
@@ -46,8 +46,8 @@ export default class StakingInfo {
      * @param {object} props
      * @param {boolean} props.declineStakingReward
      * @param {?Timestamp} props.stakePeriodStart
-     * @param {?Hbar} props.pendingReward
-     * @param {?Hbar} props.stakedToMe
+     * @param {?U2U} props.pendingReward
+     * @param {?U2U} props.stakedToMe
      * @param {?AccountId} props.stakedAccountId
      * @param {?Long} props.stakedNodeId
      */
@@ -116,11 +116,11 @@ export default class StakingInfo {
                     : null,
             pendingReward:
                 info.pendingReward != null
-                    ? Hbar.fromTinybars(info.pendingReward)
+                    ? U2U.fromTinyU2U(info.pendingReward)
                     : null,
             stakedToMe:
                 info.stakedToMe != null
-                    ? Hbar.fromTinybars(info.stakedToMe)
+                    ? U2U.fromTinyU2U(info.stakedToMe)
                     : null,
             stakedAccountId:
                 info.stakedAccountId != null

@@ -24,21 +24,21 @@ export default class ExchangeRate {
     /**
      * @private
      * @param {object} props
-     * @param {number} props.hbars
+     * @param {number} props.u2us
      * @param {number} props.cents
      * @param {Date} props.expirationTime
      */
     constructor(props) {
         /**
-         * Denotes Hbar equivalent to cents (USD)
+         * Denotes U2U equivalent to cents (USD)
          *
          * @readonly
          * @type {number}
          */
-        this.hbars = props.hbars;
+        this.u2us = props.u2us;
 
         /**
-         * Denotes cents (USD) equivalent to Hbar
+         * Denotes cents (USD) equivalent to U2U
          *
          * @readonly
          * @type {number}
@@ -59,19 +59,19 @@ export default class ExchangeRate {
          * @readonly
          * @type {number}
          */
-        this.exchangeRateInCents = props.cents / props.hbars;
+        this.exchangeRateInCents = props.cents / props.u2us;
 
         Object.freeze(this);
     }
 
     /**
      * @internal
-     * @param {import("@hashgraph/proto").proto.IExchangeRate} rate
+     * @param {import("@u2u/proto").proto.IExchangeRate} rate
      * @returns {ExchangeRate}
      */
     static _fromProtobuf(rate) {
         return new ExchangeRate({
-            hbars: /** @type {number} */ (rate.hbarEquiv),
+            u2us: /** @type {number} */ (rate.u2uEquiv),
             cents: /** @type {number} */ (rate.centEquiv),
             expirationTime: new Date(
                 rate.expirationTime != null
@@ -87,11 +87,11 @@ export default class ExchangeRate {
 
     /**
      * @internal
-     * @returns {import("@hashgraph/proto").proto.IExchangeRate}
+     * @returns {import("@u2u/proto").proto.IExchangeRate}
      */
     _toProtobuf() {
         return {
-            hbarEquiv: this.hbars,
+            u2uEquiv: this.u2us,
             centEquiv: this.cents,
             expirationTime: {
                 seconds: Long.fromNumber(

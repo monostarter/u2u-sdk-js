@@ -24,21 +24,21 @@ import ContractId from "../contract/ContractId.js";
 import TokenId from "../token/TokenId.js";
 import NftId from "../token/NftId.js";
 import Long from "long";
-import Hbar from "../Hbar.js";
-import HbarAllowance from "./HbarAllowance.js";
+import U2U from "../U2U.js";
+import U2UAllowance from "./U2UAllowance.js";
 import TokenAllowance from "./TokenAllowance.js";
 import TokenNftAllowance from "./TokenNftAllowance.js";
 import * as util from "../util.js";
 
 /**
  * @namespace proto
- * @typedef {import("@hashgraph/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
- * @typedef {import("@hashgraph/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
- * @typedef {import("@hashgraph/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
- * @typedef {import("@hashgraph/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
- * @typedef {import("@hashgraph/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
- * @typedef {import("@hashgraph/proto").proto.IContractID} HashgraphProto.proto.IContractID
+ * @typedef {import("@u2u/proto").proto.ITransaction} HashgraphProto.proto.ITransaction
+ * @typedef {import("@u2u/proto").proto.ISignedTransaction} HashgraphProto.proto.ISignedTransaction
+ * @typedef {import("@u2u/proto").proto.TransactionBody} HashgraphProto.proto.TransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionBody} HashgraphProto.proto.ITransactionBody
+ * @typedef {import("@u2u/proto").proto.ITransactionResponse} HashgraphProto.proto.ITransactionResponse
+ * @typedef {import("@u2u/proto").proto.IAccountID} HashgraphProto.proto.IAccountID
+ * @typedef {import("@u2u/proto").proto.IContractID} HashgraphProto.proto.IContractID
  */
 
 /**
@@ -56,7 +56,7 @@ import * as util from "../util.js";
 export default class AccountAllowanceAdjustTransaction extends Transaction {
     /**
      * @param {object} [props]
-     * @param {HbarAllowance[]} [props.hbarAllowances]
+     * @param {U2UAllowance[]} [props.hbarAllowances]
      * @param {TokenAllowance[]} [props.tokenAllowances]
      * @param {TokenNftAllowance[]} [props.nftAllowances]
      */
@@ -65,7 +65,7 @@ export default class AccountAllowanceAdjustTransaction extends Transaction {
 
         /**
          * @private
-         * @type {HbarAllowance[]}
+         * @type {U2UAllowance[]}
          */
         this._hbarAllowances =
             props.hbarAllowances != null ? props.hbarAllowances : [];
@@ -86,7 +86,7 @@ export default class AccountAllowanceAdjustTransaction extends Transaction {
     }
 
     /**
-     * @returns {HbarAllowance[]}
+     * @returns {U2UAllowance[]}
      */
     get hbarAllowances() {
         return this._hbarAllowances;
@@ -95,11 +95,11 @@ export default class AccountAllowanceAdjustTransaction extends Transaction {
     /**
      * @deprecated
      * @param {AccountId | string} spenderAccountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @returns {AccountAllowanceAdjustTransaction}
      */
     addHbarAllowance(spenderAccountId, amount) {
-        const value = amount instanceof Hbar ? amount : new Hbar(amount);
+        const value = amount instanceof U2U ? amount : new U2U(amount);
         return this._adjustHbarAllowance(
             null,
             spenderAccountId,
@@ -110,14 +110,14 @@ export default class AccountAllowanceAdjustTransaction extends Transaction {
     /**
      * @param {AccountId | string | null} ownerAccountId
      * @param {AccountId | ContractId | string} spenderAccountId
-     * @param {Hbar} amount
+     * @param {U2U} amount
      * @returns {AccountAllowanceAdjustTransaction}
      */
     _adjustHbarAllowance(ownerAccountId, spenderAccountId, amount) {
         this._requireNotFrozen();
 
         this._hbarAllowances.push(
-            new HbarAllowance({
+            new U2UAllowance({
                 spenderAccountId:
                     typeof spenderAccountId === "string"
                         ? AccountId.fromString(spenderAccountId)
@@ -145,11 +145,11 @@ export default class AccountAllowanceAdjustTransaction extends Transaction {
      * @deprecated
      * @param {AccountId | string} ownerAccountId
      * @param {AccountId | string} spenderAccountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @returns {AccountAllowanceAdjustTransaction}
      */
     grantHbarAllowance(ownerAccountId, spenderAccountId, amount) {
-        const value = amount instanceof Hbar ? amount : new Hbar(amount);
+        const value = amount instanceof U2U ? amount : new U2U(amount);
         return this._adjustHbarAllowance(
             ownerAccountId,
             spenderAccountId,
@@ -161,11 +161,11 @@ export default class AccountAllowanceAdjustTransaction extends Transaction {
      * @deprecated
      * @param {AccountId | string} ownerAccountId
      * @param {AccountId | string} spenderAccountId
-     * @param {number | string | Long | LongObject | BigNumber | Hbar} amount
+     * @param {number | string | Long | LongObject | BigNumber | U2U} amount
      * @returns {AccountAllowanceAdjustTransaction}
      */
     revokeHbarAllowance(ownerAccountId, spenderAccountId, amount) {
-        const value = amount instanceof Hbar ? amount : new Hbar(amount);
+        const value = amount instanceof U2U ? amount : new U2U(amount);
         return this._adjustHbarAllowance(
             ownerAccountId,
             spenderAccountId,
