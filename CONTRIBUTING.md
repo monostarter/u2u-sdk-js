@@ -109,11 +109,11 @@ All Pull Requests must be approved by at least one member of the SDK team before
 
 -   Join us in our [Discord][discord] channel; there you can engage with the Hedera team and other developers and enthusiasts.
 
-[license]: https://github.com/hashgraph/hedera-sdk-js/blob/main/LICENSE
+[license]: https://github.com/monostarter/u2u-sdk-js/blob/main/LICENSE
 [mwe]: https://en.wikipedia.org/wiki/Minimal_Working_Example
 [markdown]: https://guides.github.com/features/mastering-markdown/
-[issues]: https://github.com/hashgraph/hedera-sdk-js/issues
-[pull-requests]: https://github.com/hashgraph/hedera-sdk-js/pulls
-[label-bug]: https://github.com/hashgraph/hedera-sdk-js/labels/bug
-[label-enhancement]: https://github.com/hashgraph/hedera-sdk-js/labels/enhancement
+[issues]: https://github.com/monostarter/u2u-sdk-js/issues
+[pull-requests]: https://github.com/monostarter/u2u-sdk-js/pulls
+[label-bug]: https://github.com/monostarter/u2u-sdk-js/labels/bug
+[label-enhancement]: https://github.com/monostarter/u2u-sdk-js/labels/enhancement
 [discord]: https://hedera.com/discord

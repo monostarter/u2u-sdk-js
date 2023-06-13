@@ -12,13 +12,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 async function main() {
-    /* Source and context:https://github.com/hashgraph/hedera-sdk-js/issues/1333
+    /* Source and context:https://github.com/monostarter/u2u-sdk-js/issues/1333
 
         In when we are submiting a message to a topic ID, if this message is large, the SDK is separating it on chunks:
             -   The default max chunks are set to 20
             -   If the message is too large, the user needs to set the default max chunks
             -   If the user uses the execute, and get receipt, the receipt is only returned on the first transaction
-            -   The user can use executeAll and then as showed in this example, to track every chunk transaction status. 
+            -   The user can use executeAll and then as showed in this example, to track every chunk transaction status.
     */
     let client;
 

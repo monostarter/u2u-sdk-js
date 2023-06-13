@@ -8,104 +8,104 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## v2.26.0
 
 ## What's Changed
-* Fix: decrement unhealthy nodes count on readmit time expiry by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1613
-* Fix: unhealthy nodes by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1611
-* Add logger and transaction stats inside the SDK by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1607
+* Fix: decrement unhealthy nodes count on readmit time expiry by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1613
+* Fix: unhealthy nodes by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1611
+* Add logger and transaction stats inside the SDK by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1607
 
 ## v2.26.0-beta.3
 
 ## What's Changed
-* Fix: decrement unhealthy nodes count on readmit time expiry by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1613
+* Fix: decrement unhealthy nodes count on readmit time expiry by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1613
 
 ## v2.26.0-beta.2
 
 ## What's Changed
-* Fix: unhealthy nodes by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1611
+* Fix: unhealthy nodes by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1611
 
 ## v2.26.0-beta.1
 
 ## What's Changed
-* Add logger and transaction stats inside the SDK by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1607
+* Add logger and transaction stats inside the SDK by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1607
 
 ## v2.25.0
 
 ## What's Changed
-* Create example of deploy contract with value by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1604
-* Unhealthy node info by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1605
-* Fix: encoding decoding function params by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1608
+* Create example of deploy contract with value by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1604
+* Unhealthy node info by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1605
+* Fix: encoding decoding function params by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1608
 
 ## v2.24.2
 
 ## What's Changed
-* Fix: list is locked when trying to get the hash before signing the transaction by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1576
-* Add zero padding for nanos by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1573
-* Аdd export for EntityIdHelper by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1574
-* Add contractId as possible input for AccountAllowancesApproveTransaction by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1575
-* Add assessment method support for custom fractional fees by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1600
+* Fix: list is locked when trying to get the hash before signing the transaction by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1576
+* Add zero padding for nanos by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1573
+* Аdd export for EntityIdHelper by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1574
+* Add contractId as possible input for AccountAllowancesApproveTransaction by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1575
+* Add assessment method support for custom fractional fees by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1600
 
 ## v2.24.1-beta.1
 
 ## What's Changed
-* Fix: list is locked when trying to get the hash before signing the transaction by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1576
-* Add zero padding for nanos by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1573
-* Аdd export for EntityIdHelper by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1574
-* Add contractId as possible input for AccountAllowancesApproveTransaction by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1575
+* Fix: list is locked when trying to get the hash before signing the transaction by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1576
+* Add zero padding for nanos by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1573
+* Аdd export for EntityIdHelper by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1574
+* Add contractId as possible input for AccountAllowancesApproveTransaction by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1575
 
 ## v2.24.1
 
 ## What's Changed
-* Fix: remove the insecure port of mirror nodes by @dikel in https://github.com/hashgraph/hedera-sdk-js/pull/1535
-* Fix: mnemonic refactoring by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1550
-* Change dependabot interval to monthly by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1547
-* Create example for getting all chunked messages statuses by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1536
-* Fix: spelling of `HARDENED` exported constant by @bguiz in https://github.com/hashgraph/hedera-sdk-js/pull/1561
-* Feature add alias support in AccountCreateTX by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1563
-* Add exports for types by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1566
+* Fix: remove the insecure port of mirror nodes by @dikel in https://github.com/monostarter/u2u-sdk-js/pull/1535
+* Fix: mnemonic refactoring by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1550
+* Change dependabot interval to monthly by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1547
+* Create example for getting all chunked messages statuses by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1536
+* Fix: spelling of `HARDENED` exported constant by @bguiz in https://github.com/monostarter/u2u-sdk-js/pull/1561
+* Feature add alias support in AccountCreateTX by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1563
+* Add exports for types by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1566
 
 ## v2.24.0-beta.1
 
 ## What's Changed
-* Fix: remove the insecure port of mirror nodes by @dikel in https://github.com/hashgraph/hedera-sdk-js/pull/1535
-* Fix: mnemonic refactoring by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1550
-* Change dependabot interval to monthly by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1547
-* Create example for getting all chunked messages statuses by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1536
+* Fix: remove the insecure port of mirror nodes by @dikel in https://github.com/monostarter/u2u-sdk-js/pull/1535
+* Fix: mnemonic refactoring by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1550
+* Change dependabot interval to monthly by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1547
+* Create example for getting all chunked messages statuses by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1536
 
 ## v2.24.0
 
 ## What's Changed
-* Expose some PublicKey methods by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1521
-* Fix operator and operator account id override in beforeExecute by @dikel in https://github.com/hashgraph/hedera-sdk-js/pull/1531
-* fix contract create flow with external signer by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1533
+* Expose some PublicKey methods by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1521
+* Fix operator and operator account id override in beforeExecute by @dikel in https://github.com/monostarter/u2u-sdk-js/pull/1531
+* fix contract create flow with external signer by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1533
 
 ## v2.23.0
 
 ## What's Changed
 
--   Fix examples build warnings by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1475
--   Refactor variables by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1481
--   Fix/loop nodes accounts by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1493
--   Fix/get cost query by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1496
--   Create github workflow for updating the docs by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1516
+-   Fix examples build warnings by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1475
+-   Refactor variables by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1481
+-   Fix/loop nodes accounts by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1493
+-   Fix/get cost query by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1496
+-   Create github workflow for updating the docs by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1516
 
 ## v2.22.0
 
 ## What's Changed
 
--   Feature nft allowance tests by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1468
--   Release/hip 583 by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1472
+-   Feature nft allowance tests by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1468
+-   Release/hip 583 by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1472
 
 ## v2.20.0
 
 ## What's Changed
 
--   Add new status codes by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1400
--   chore(deps-dev): bump typescript from 4.9.4 to 4.9.5 in /examples/react-native-example by @dependabot in https://github.com/hashgraph/hedera-sdk-js/pull/1438
--   chore(deps): bump react-native from 0.71.1 to 0.71.2 in /examples/react-native-example by @dependabot in https://github.com/hashgraph/hedera-sdk-js/pull/1437
--   chore(deps): bump react-native-web from 0.18.10 to 0.18.12 in /examples/react-native-example by @dependabot in https://github.com/hashgraph/hedera-sdk-js/pull/1436
--   chore(deps): bump ua-parser-js from 0.7.31 to 0.7.33 in /examples/react-native-example by @dependabot in https://github.com/hashgraph/hedera-sdk-js/pull/1435
--   chore(deps): bump decode-uri-component from 0.2.0 to 0.2.2 in /examples/react-native-example by @dependabot in https://github.com/hashgraph/hedera-sdk-js/pull/1434
--   Fix \_maxAutomaticTokenAssociations in contract create and contract up… by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1444
--   Feature/extend ethereumflow by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1447
+-   Add new status codes by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1400
+-   chore(deps-dev): bump typescript from 4.9.4 to 4.9.5 in /examples/react-native-example by @dependabot in https://github.com/monostarter/u2u-sdk-js/pull/1438
+-   chore(deps): bump react-native from 0.71.1 to 0.71.2 in /examples/react-native-example by @dependabot in https://github.com/monostarter/u2u-sdk-js/pull/1437
+-   chore(deps): bump react-native-web from 0.18.10 to 0.18.12 in /examples/react-native-example by @dependabot in https://github.com/monostarter/u2u-sdk-js/pull/1436
+-   chore(deps): bump ua-parser-js from 0.7.31 to 0.7.33 in /examples/react-native-example by @dependabot in https://github.com/monostarter/u2u-sdk-js/pull/1435
+-   chore(deps): bump decode-uri-component from 0.2.0 to 0.2.2 in /examples/react-native-example by @dependabot in https://github.com/monostarter/u2u-sdk-js/pull/1434
+-   Fix \_maxAutomaticTokenAssociations in contract create and contract up… by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1444
+-   Feature/extend ethereumflow by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1447
 -   Fix/timeout issue by @ochikov in #1414
 -   Updated Protobuf statuses
 -   fix ping to throw by @ochikov in #1426
@@ -113,68 +113,68 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Removed unnecessary check by @petreze in #1429
 -   Fix inaccurate cost calculation by @petreze in #1430
 -   Fix/update mirror endpoints #1448
--   Add delete nft allowances and add delegate spender functionality by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1452
+-   Add delete nft allowances and add delegate spender functionality by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1452
 
-**Full Changelog**: https://github.com/hashgraph/hedera-sdk-js/compare/v2.19.2...v2.20.0
+**Full Changelog**: https://github.com/monostarter/u2u-sdk-js/compare/v2.19.2...v2.20.0
 
 ## v2.19.2
 
 ## What's Changed
 
--   Return dependabot dependency checker by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1361
--   Release/cryptography v1.4.2 by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1366
--   Fix web proxy by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1395
+-   Return dependabot dependency checker by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1361
+-   Release/cryptography v1.4.2 by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1366
+-   Fix web proxy by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1395
 -   Fix `PublicKey.fromString(newAccountPublicKey.toStringDer());`
 
 ## v2.19.1
 
 ## What's Changed
 
--   KeyList now handles single key properly as first parameter by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1348
--   Fix typo in deprecation suggestion by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1352
--   Update contribution guide by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1353
--   Add max execution time setter for NodeChannel GRPC by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1354
--   Update the addressbook update to be 24 hours by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1359
+-   KeyList now handles single key properly as first parameter by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1348
+-   Fix typo in deprecation suggestion by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1352
+-   Update contribution guide by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1353
+-   Add max execution time setter for NodeChannel GRPC by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1354
+-   Update the addressbook update to be 24 hours by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1359
 
 ## v2.19.0
 
 ## What's Changed
 
--   Update the Mainnet mirror node and add integration test by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1327
--   Bug/1326 mirror network update by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1328
--   Added getters and deprecated old ones by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1329
--   Integration test workflow by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1330
--   Added proxies for different networks by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1331
--   Аdded NFKD normalization for mnemonic passphrase by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1335
--   Change param of getNftInfo from allowanceSpenderAccountId to spenderId by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1337
--   Fix for optional param of transaction range by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1339
+-   Update the Mainnet mirror node and add integration test by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1327
+-   Bug/1326 mirror network update by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1328
+-   Added getters and deprecated old ones by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1329
+-   Integration test workflow by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1330
+-   Added proxies for different networks by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1331
+-   Аdded NFKD normalization for mnemonic passphrase by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1335
+-   Change param of getNftInfo from allowanceSpenderAccountId to spenderId by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1337
+-   Fix for optional param of transaction range by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1339
 
 ## v2.18.6
 
 ## What's Changed
 
--   Fix some of the Github workflows by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1311
--   Bug/unhealthy node by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1321
+-   Fix some of the Github workflows by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1311
+-   Bug/unhealthy node by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1321
 
 ## v2.18.5
 
 ## What's Changed
 
--   Throw timeout error and do not make the node unhealthy by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1298
--   Refactor the HIP to point to testnet by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1303
--   Fix for fromBytes to return the range in PrngTransaction by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1302
--   Fix HIP-573 example by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1300
+-   Throw timeout error and do not make the node unhealthy by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1298
+-   Refactor the HIP to point to testnet by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1303
+-   Fix for fromBytes to return the range in PrngTransaction by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1302
+-   Fix HIP-573 example by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1300
 
 ## v2.18.4
 
 ## What's Changed
 
--   Example/hip 573 by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1292
--   Example/hip 564 by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1285
--   Example/hip 542 by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1293
--   bug: fix and improve taskfiles workflow by @petreze in https://github.com/hashgraph/hedera-sdk-js/pull/1283
--   Fix the task test:release command by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1296
--   Fix the offset for uint24 & int24 datatypes in contract functions params by @ochikov in https://github.com/hashgraph/hedera-sdk-js/pull/1295
+-   Example/hip 573 by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1292
+-   Example/hip 564 by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1285
+-   Example/hip 542 by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1293
+-   bug: fix and improve taskfiles workflow by @petreze in https://github.com/monostarter/u2u-sdk-js/pull/1283
+-   Fix the task test:release command by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1296
+-   Fix the offset for uint24 & int24 datatypes in contract functions params by @ochikov in https://github.com/monostarter/u2u-sdk-js/pull/1295
 
 ## v2.19.0-beta.1
 
@@ -1470,7 +1470,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   https://github.com/hashgraph/hedera-sdk-js/issues/175
+-   https://github.com/monostarter/u2u-sdk-js/issues/175
 
 ## v1.1.1
 
