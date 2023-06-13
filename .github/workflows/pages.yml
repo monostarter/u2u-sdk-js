@@ -1,4 +1,4 @@
-name: Build & Test
+name: Build & Update Pages
 
 on:
     push:
@@ -11,9 +11,12 @@ env:
 jobs:
     build-and-deploy-docs:
         runs-on: ubuntu-latest
+        permissions:
+            pages: "write"
+            id-token: "write"
         strategy:
             matrix:
-                node: ["14", "16"]
+                node: ["16"]
 
         steps:
             - uses: actions/checkout@v2
